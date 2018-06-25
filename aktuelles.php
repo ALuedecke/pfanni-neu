@@ -65,7 +65,8 @@
                                 Bitte beachten Sie, dass eine halbe Stunde vor Sprechstundenende die Patientenannahme schließt!</p>
                             <p>&nbsp;</p>
                             <p>&nbsp;</p>
-						</div>
+                            <?php include("scripts/vacation.php"); ?>
+							</div>
                     </div>
                     <p>&nbsp;</p>
                 </div>
