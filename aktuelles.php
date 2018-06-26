@@ -59,14 +59,13 @@
                         <h2 id="mainHeader" style="text-align:center">Aktuelles</h2>
                     </div>
                     <div id="content">
-                        <div align="center">
+                        <blockquote style="text-align:left">
                             <p>&nbsp;</p>
                             <p style="color:#800000; font-weight:bold;">
                                 Bitte beachten Sie, dass eine halbe Stunde vor Sprechstundenende die Patientenannahme schließt!</p>
                             <p>&nbsp;</p>
-                            <p>&nbsp;</p>
                             <?php include("scripts/vacation.php"); ?>
-							</div>
+                        </blockquote>
                     </div>
                     <p>&nbsp;</p>
                 </div>

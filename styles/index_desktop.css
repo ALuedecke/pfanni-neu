@@ -174,3 +174,14 @@ img {
     padding-right:10px;  
 	text-align:center;
 }
+
+.vacation table {
+    left:50%;
+	vertical-align:middle;
+}
+	
+.vacation td {
+    margin:0.1em;
+    padding-left:0;
+    padding-right:20px;  
+}

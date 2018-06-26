@@ -3,11 +3,10 @@
 Urlaub vom 01.08.2018 bis 31.08.2018
 
 
-
 #Vertretung1
 #x
 Urlaubsvertretung
-vom 08. - 24.03.2018
+vom 01. - 31.08.2018
 
 Frau Dr. med. R. Grygas
 Gr&uuml;nauer Str. 60
@@ -16,7 +15,7 @@ Gr&uuml;nauer Str. 60
 Tel. 030 6731375
 
 #Vertretung2
-#x
+#
 Urlaubsvertretung
 vom 26. - 28.03.2018
 
@@ -27,7 +26,7 @@ Schwalbenweg 36
 Tel. 030 6721404
 
 #Vertretung3
-#x
+#
 Urlaubsvertretung
 vom 08. - 29.03.2018
 

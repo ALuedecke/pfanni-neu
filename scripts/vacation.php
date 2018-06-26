@@ -5,6 +5,7 @@
  * Created:  Jun/23/2018
  */
   $idx           = 0;
+  $note          = false;
   $print         = false;
   $subst1        = false;
   $subst1_txt    = '';
@@ -12,7 +13,7 @@
   $subst2_txt    = '';
   $subst3        = false;
   $subst3_txt    = '';
-  $subst_table   = '<table><tr><td>:subst1:</td><td>:subst2:</td><td>:subst3:</td></tr></table>';
+  $subst_table   = '<table class="vacation"><tr><td>:subst1:</td><td>:subst2:</td><td>:subst3:</td></tr></table>';
   $vacation      = false;
   $vacation_file = 'vacation.txt';
   
@@ -23,8 +24,6 @@
   $out = file($vacation_file);
   $size = sizeof($out);
 
-  echo '<blockquote style="text-align:left">';
-  
   for ($i = 0; $i < $size; $i++) {
 	$txt = str_replace("\r\n", "\n", $out[$i]);
 	$txt = str_replace("\n", "", $txt);
@@ -66,7 +65,9 @@
 	}
     /* Urlaubsvertretung 2 */
 	if ($txt == "#Vertretung2") {
-	  $subst_table = str_replace(":subst1:", $subst1_txt, $subst_table);
+	  if ($subst1_txt != '') {
+	    $subst_table = str_replace(":subst1:", $subst1_txt, $subst_table);
+	  }
 	  $print = false;
  	  $subst1 = false;
  	  $subst2 = true;
@@ -86,7 +87,12 @@
 	}
     /* Urlaubsvertretung 3 */
 	if ($txt == "#Vertretung3") {
-	  $subst_table = str_replace(":subst2:", $subst2_txt, $subst_table);
+	  if ($subst1_txt != '' && $subst2_txt != '') {
+	    $subst_table = str_replace(":subst2:", $subst2_txt, $subst_table);
+	  }
+	  if ($subst1_txt == '' && $subst2_txt != '') {
+		$subst_table = str_replace(":subst1:", $subst2_txt, $subst_table);
+	  }
 	  $print = false;
  	  $subst2 = false;
  	  $subst3 = true;
@@ -106,10 +112,37 @@
 	}
 	/* Bemerkung */
 	if ($txt == "#Bemerkung") {
-	  $subst_table = str_replace(":subst3:", $subst3_txt, $subst_table);
+	  if ($subst1_txt != '' && $subst2_txt != '' && $subst3_txt != '') {
+	    $subst_table = str_replace(":subst3:", $subst3_txt, $subst_table);
+	  }
+	  if ($subst1_txt == '' && $subst2_txt != '' && $subst3_txt != '') {
+		$subst_table = str_replace(":subst2:", $subst3_txt, $subst_table);
+	  }
+	  if ($subst1_txt == '' && $subst2_txt == '' && $subst3_txt != '') {
+		$subst_table = str_replace(":subst1:", $subst3_txt, $subst_table);
+	  }
+	  if ($subst1_txt != '' && $subst2_txt == '' && $subst3_txt != '') {
+		$subst_table = str_replace(":subst2:", $subst3_txt, $subst_table);
+	  }
+	  $subst_table = str_replace(":subst1:", '', $subst_table);
+	  $subst_table = str_replace(":subst2:", '', $subst_table);
+	  $subst_table = str_replace(":subst3:", '', $subst_table);
 	  echo $subst_table;
+	  $print = false;
+ 	  $subst3 = false;
+	  $note = true;
+	}
+	if ($note && $txt == "#x") {
+	  $print = true;
+	  $idx = $i + 1;
+	}
+	if ($note && $print) {
+	  if ($i == $idx) {
+	    echo '<b>' . $txt . '</b><br />';
+	  }
+	  if ($txt == "") {
+		echo '<br />';
+	  }
 	}
   }
-
-  echo '</blockquote>';
 ?>
