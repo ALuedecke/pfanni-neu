@@ -51,8 +51,8 @@
     </div>
     <table style="width:100%">
         <tr>
-            <td style="width:15%"></td>
-            <td style="width:70%">
+            <td style="width:25%"></td>
+            <td style="width:50%">
                 <div id="main" class="text">
                     <div id="intro">
                         <br />
@@ -70,7 +70,7 @@
                     <p>&nbsp;</p>
                 </div>
             </td>
-            <td style="width:15%"></td>
+            <td style="width:25%"></td>
         </tr>
     </table>
 </body>
