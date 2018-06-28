@@ -4,6 +4,7 @@
  * Purpose:  Display vacations and holidays
  * Created:  Jun/23/2018
  */
+  $html          = '';
   $idx           = 0;
   $note          = false;
   $print         = false;
@@ -22,12 +23,11 @@
   }
 
   $out = file($vacation_file);
-  $size = sizeof($out);
+  $size = count($out);
 
   for ($i = 0; $i < $size; $i++) {
 	  $txt = str_replace("\r\n", "\n", $out[$i]);
 	  $txt = str_replace("\n", "", $txt);
-	
 	  /* Urlaub */
 	  if ($txt == "#Urlaub") {
 	    $vacation = true;
@@ -38,10 +38,9 @@
 	  }
 	  if ($vacation && $print) {
 	    if ($i == $idx) {
-	      echo '<b>' . $txt . '</b><br />';
-	    }
-	    if ($txt == "") {
-	  	  echo '<br />';
+	      $html = $html . '<b>' . $txt . '</b><br />';
+	    } elseif ($i > $idx && $txt != "#Vertretung1") {
+	  	    $html = $html . $txt . '<br />';
 	    }
 	  }
     /* Urlaubsvertretung 1 */
@@ -127,7 +126,7 @@
 	    $subst_table = str_replace(":subst1:", '', $subst_table);
 	    $subst_table = str_replace(":subst2:", '', $subst_table);
 	    $subst_table = str_replace(":subst3:", '', $subst_table);
-	    echo $subst_table;
+	    $html = $html . $subst_table;
 	    $print = false;
  	    $subst3 = false;
 	    $note = true;
@@ -138,11 +137,12 @@
 	  }
 	  if ($note && $print) {
 	    if ($i == $idx) {
-	      echo '<b>' . $txt . '</b><br />';
-	    }
-	    if ($txt == "") {
-		    echo '<br />';
+	      $html = $html . '<b>' . $txt . '</b><br />';
+	    } elseif ($i > $idx) {
+		    $html = $html . $txt . '<br />';
 	    }
 	  }
-	}
+  }
+	
+	echo $html;
 ?>

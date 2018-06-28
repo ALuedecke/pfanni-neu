@@ -1,10 +1,10 @@
 #Urlaub
-#
+#x
 Urlaub vom 01.08.2018 bis 31.08.2018
 
 
 #Vertretung1
-#
+#x
 Urlaubsvertretung
 vom 01. - 31.08.2018
 
@@ -13,6 +13,7 @@ Gr&uuml;nauer Str. 60
 12524 Berlin
 
 Tel. 030 6731375
+
 
 #Vertretung2
 #
@@ -25,6 +26,7 @@ Schwalbenweg 36
 
 Tel. 030 6721404
 
+
 #Vertretung3
 #
 Urlaubsvertretung
@@ -36,6 +38,9 @@ Britzer Damm 106
 
 Tel. 030 6613166
 
+
 #Bemerkung
-#
+#x
 Um telefonische Voranmeldung wird gebeten!
+
+
