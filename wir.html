@@ -53,7 +53,7 @@
     </div>
     <table style="width:100%">
         <tr>
-            <td style="width:25%"></td>
+            <td class="columnleft"></td>
             <td style="width:50%">
                 <div id="main" class="text">
                     <div id="intro">
