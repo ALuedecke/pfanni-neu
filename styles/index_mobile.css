@@ -31,7 +31,7 @@ img {
 }
 
 .columnleft {
-	width:5%;
+	width:0%;
 }
 
 .dashboard {
@@ -61,6 +61,7 @@ img {
 .dashboard a {
     color:#F0F0F0;
     display:block;
+    font-size:small;
     font-weight:bold;
     margin-left:20px; 
     margin-right:20px;
