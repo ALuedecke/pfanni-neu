@@ -1,6 +1,6 @@
 /*
  * Author:   A. Luedecke
- * Purpose:  Index styles for desktop computers
+ * Purpose:  Index styles for mobile devices
  * Created:  Jun/19/2018
  */
 body {
@@ -31,7 +31,7 @@ img {
 }
 
 .columnleft {
-	width:25%;
+	width:2px;
 }
 
 .dashboard {
@@ -39,7 +39,7 @@ img {
     margin-top:0;
     margin-bottom:0;
     width:100%;
-    text-align:center;
+    text-align:left;
 }
 
 .dashboard ul {
@@ -61,7 +61,7 @@ img {
 .dashboard a {
     color:#F0F0F0;
     display:block;
-    font-size:1em;
+    font-size:small;
     font-weight:bold;
     margin-left:20px; 
     margin-right:20px;
@@ -106,7 +106,7 @@ img {
 
 .title {
     color:#404060;
-    text-align:center;
+    text-align:left;
     vertical-align:top;
 }
 

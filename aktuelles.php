@@ -7,10 +7,12 @@
     <meta name="description" content="Aktuelles - Ihr Kinderarzt Dr. med. Thomas Pfannschmidt - Kinderarztpraxis Berlin Altglienicke" />
     <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin"  />
     <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
     <title>Kinderarztpraxis Dr. med. Thomas Pfannschmidt in Berlin Altglienicke</title>
     <link rel="Shortcut Icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" media="screen" href="styles/index_desktop.css" type="text/css" />
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="styles/index_mobile.css" type="text/css" />
+    <link rel="stylesheet" media="only screen and (orientation: portrait)" href="styles/index_mobile.css" type="text/css" />
 </head>
 
 <body>
@@ -51,29 +53,26 @@
     </div>
     <table style="width:100%">
         <tr>
-            <td style="width:15%"></td>
-            <td style="width:70%">
+            <td class="columnleft"></td>
+            <td style="width:50%">
                 <div id="main" class="text">
                     <div id="intro">
                         <br />
                         <h2 id="mainHeader" style="text-align:center">Aktuelles</h2>
                     </div>
                     <div id="content">
-                        <div align="center">
+                        <blockquote style="text-align:left">
                             <p>&nbsp;</p>
                             <p style="color:#800000; font-weight:bold;">
                                 Bitte beachten Sie, dass eine halbe Stunde vor Sprechstundenende die Patientenannahme schließt!</p>
                             <p>&nbsp;</p>
-                            <p>&nbsp;</p>
-                            <p>&nbsp;</p>
-                            <p>&nbsp;</p>
-                            <p>&nbsp;</p>
-                        </div>
+                            <?php include("scripts/vacation.php"); ?>
+                        </blockquote>
                     </div>
                     <p>&nbsp;</p>
                 </div>
             </td>
-            <td style="width:15%"></td>
+            <td style="width:25%"></td>
         </tr>
     </table>
 </body>
