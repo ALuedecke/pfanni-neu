@@ -31,7 +31,11 @@ img {
 }
 
 .columnleft {
-	width:2px;
+	width:0;
+}
+
+.columnmid {
+	width:35%;
 }
 
 .dashboard {
