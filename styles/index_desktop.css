@@ -7,7 +7,7 @@
  /* Mobile devices */
  @media screen and (max-width:1024px) {
     body {
-        background-color:#FFFFFF;
+        background-color:#D0E0FF;
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     h2 {
@@ -104,7 +104,7 @@
         font-family:Tahoma;
         font-size:small;
         text-align:left;
-        width:900px;
+        width:850px;
     }
     
     .title {
