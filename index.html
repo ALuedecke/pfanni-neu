@@ -11,8 +11,6 @@
     <title>Kinderarztpraxis Dr. med. Thomas Pfannschmidt in Berlin Altglienicke</title>
     <link rel="Shortcut Icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" media="screen" href="styles/index_desktop.css" type="text/css" />
-    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="styles/index_mobile.css" type="text/css" />
-    <link rel="stylesheet" media="only screen and (orientation: portrait)" href="styles/index_mobile.css" type="text/css" />
 </head>
 
 <body>
@@ -20,6 +18,7 @@
         <img class="icon" src="res/arzt_icon.jpg" alt="icon"> Kinderarztpraxis Dr. med. Thomas Pfannschmidt
     </h2>
     <div class="top-menu">
+        <img src="res/menu_icon.jpg" alt="menu" onclick="showResMenu()">
         <ul class="reframe">
             <li>
                 <a href="">Home</a>
@@ -29,6 +28,26 @@
             </li>
             <li>
                 <a href="datenschutz.html">Datenschutz</a>
+            </li>
+        </ul>
+        <ul class="invisible responsive" id="res_menu">
+            <li>
+                <a href="">Home</a>
+            </li>
+            <li>
+                <a href="impressum.html">Impressum</a>
+            </li>
+            <li>
+                <a href="datenschutz.html">Datenschutz</a>
+            </li>
+            <li>
+                <a href="wir.html">Wir stellen uns vor</a>
+            </li>
+            <li>
+                <a href="aktuelles.php">Aktuelles</a>
+            </li>
+            <li>
+                <a href="angebot.html">Das k&ouml;nnen wir Ihnen bieten</a>
             </li>
         </ul>
     </div>
@@ -54,7 +73,7 @@
     <table style="width:100%">
         <tr>
             <td class="columnleft"></td>
-            <td style="width:50%">
+            <td class="columnmid">
                 <div id="main" class="text">
                     <p>&nbsp;</p>
                     <div id="content">
@@ -119,6 +138,7 @@
             <td style="width:25%"></td>
         </tr>
     </table>
+    <script async type="text/javascript" src="scripts/responsive_menu.js"></script>
     <script async type="text/javascript" src="scripts/no_context.js"></script>
 </body>
 

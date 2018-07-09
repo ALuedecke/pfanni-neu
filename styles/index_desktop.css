@@ -3,16 +3,260 @@
  * Purpose:  Index styles for desktop computers
  * Created:  Jun/19/2018
  */
-body {
-    background-image:url("../res/praxis_1920.jpg");
-    background-attachment:fixed;
-    background-repeat:no-repeat;
-    background-size:cover;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+ /* Mobile devices */
+ @media screen and (max-width:1024px) {
+    body {
+        background-color:#D0E0FF;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    h2 {
+        font-size:1.2em;
+        height:20px;
+    }
+    
+    .active {
+        background-color:#8080A0;
+    }
+    
+    .columnleft {
+        width:0;
+    }
+    
+    .columnmid {
+        width:30%;
+    }
+    
+    .dashboard {
+        display:none;
+    }
+
+    .invisible {
+        display:none;
+    }
+
+    .reframe {
+        display:none;
+    }
+    
+    .visible {
+        position:sticky;
+    }
+
+    .responsive {
+        max-width:200px;
+    }
+    
+    .responsive li {
+        background-color:rgb(32, 111, 175);
+        border-color: #fff;
+        border-style:solid;
+        border-left:none; 
+        border-right:none;
+        border-top:none;
+        border-width:1px;
+        display:block;
+    }
+
+    .responsive li:hover {
+        background-color:#FFFFB0;
+    }
+    
+    .responsive li:last-child {
+        border-bottom:none;
+    }
+    .responsive a {
+        color:#fff;
+        display:block;
+        font-size:1em;
+        margin-right:20px;
+        margin-top:0;
+        padding:6px 6px 15px 16px;
+        text-decoration:none;
+    }
+    
+    .responsive li:last-child {
+        border-bottom:none;
+    }
+
+    .responsive a:hover {
+        border-bottom:none;
+        color:#404060;
+    }
+    
+    .text {
+        background-color:#F0F0F0;
+        color:#404060;
+        font-family:Tahoma;
+        font-size:small;
+        text-align:left;
+        width:825px;
+    }
+    
+    .title {
+        color:#404060;
+        text-align:left;
+        vertical-align:top;
+    }
+    
+    .top-menu {
+        background-color:rgb(32, 111, 175);
+        list-style-type:none;
+        margin-top:0;
+        margin-bottom:0;
+        height:48px;
+        width:100%;
+    }
+
+    .top-menu img {
+        border-style:none;
+        cursor:pointer;
+        width:32px;
+        height:32px;
+        padding-left:0;
+        padding-top:6px;
+    }
+
+    .top-menu ul {
+        margin-top:0;
+        padding:0 0 0;
+    }
 }
 
-h2 {
-    height:20px;
+ /* Desktop */
+ @media screen and (min-width:1025px) {
+    body {
+        background-image:url("../res/praxis_1920.jpg");
+        background-attachment:fixed;
+        background-repeat:no-repeat;
+        background-size:cover;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        height:20px;
+    }
+    
+    .active {
+        background-color:#8080A0;
+    }
+    
+    .columnleft {
+        width:25%;
+    }
+    
+    .columnmid {
+        width:50%;
+    }
+    
+    .dashboard {
+        list-style-type:none;
+        margin-top:0;
+        margin-bottom:0;
+        width:100%;
+        text-align:center;
+    }
+    
+    .dashboard ul {
+        margin-top:0;
+        padding:0 0 10px;
+    }
+    
+    .dashboard li {
+        display:inline-block;
+        background-color: #606080;
+        border-style:solid;
+        border-width:1px;
+    }
+    
+    .dashboard li:hover {
+        background-color:#FFFFF0;
+    }
+    
+    .dashboard a {
+        color:#F0F0F0;
+        display:block;
+        font-size:1em;
+        font-weight:bold;
+        margin-left:20px; 
+        margin-right:20px;
+        margin-top:0;
+        padding:10px 6px 10px 0;
+        text-decoration:none;
+    }
+    
+    .dashboard a:hover {
+        color:#606080;
+    }
+        
+    .reframe {
+        min-width:480px;
+        margin-left:10px;
+        margin-right:10px
+    }
+
+    .responsive {
+        display:none;
+    }
+
+    .text {
+        background-color:#F0F0F0;
+        color:#404060;
+        font-family:Tahoma;
+        font-size:small;
+        text-align:left;
+        width:1000px;
+    }
+    
+    .title {
+        color:#404060;
+        text-align:center;
+        vertical-align:top;
+    }
+    
+    .top-menu {
+        background-color:rgb(32, 111, 175);
+        list-style-type:none;
+        margin-top:0;
+        margin-bottom:0;
+        height:48px;
+        width:100%;
+    }
+    
+    .top-menu ul {
+        margin-top:0;
+        padding:6px 0 10px;
+    }
+    
+    .top-menu li {
+        display:inline-block;
+    }
+    
+    .top-menu li:last-child a {
+        margin-right:0;
+        padding-right:0;
+    }
+    
+    .top-menu a {
+        border-bottom:none;
+        color:#fff;
+        display:block;
+        font-size:1em;
+        margin-right:20px;
+        margin-top:0;
+        padding:6px 6px 15px 0;
+        text-decoration:none;
+    }
+    
+    .top-menu a:hover {
+        border-bottom:none;
+        color:gainsboro;
+    } 
+
+    .top-menu img {
+        display:none;
+    }
 }
 
 img {
@@ -24,54 +268,6 @@ img {
     padding-right:15px;
     width:201px;
     height:151px;
-}
-
-.active {
-    background-color:#8080A0;
-}
-
-.columnleft {
-	width:25%;
-}
-
-.dashboard {
-    list-style-type:none;
-    margin-top:0;
-    margin-bottom:0;
-    width:100%;
-    text-align:center;
-}
-
-.dashboard ul {
-    margin-top:0;
-    padding:0 0 10px;
-}
-
-.dashboard li {
-    display:inline-block;
-    background-color: #606080;
-    border-style:solid;
-    border-width:1px;
-}
-
-.dashboard li:hover {
-    background-color:#FFFFF0;
-}
-
-.dashboard a {
-    color:#F0F0F0;
-    display:block;
-    font-size:1em;
-    font-weight:bold;
-    margin-left:20px; 
-    margin-right:20px;
-    margin-top:0;
-    padding:10px 6px 10px 0;
-    text-decoration:none;
-}
-
-.dashboard a:hover {
-    color:#606080;
 }
 
 .dummy {
@@ -89,102 +285,41 @@ img {
     font-family:Tahoma;
 }
 
-.reframe{
-    min-width:300px;
-    margin-left:10px;
-    margin-right:10px
-}
-
-.text {
-    background-color:#F0F0F0;
-    color:#404060;
-    font-family:Tahoma;
-    font-size:small;
-    text-align:left;
-	width:1000px;
-}
-
-.title {
-    color:#404060;
-    text-align:center;
-    vertical-align:top;
-}
-
-.top-menu {
-    background-color:rgb(32, 111, 175);
-    list-style-type:none;
-    margin-top:0;
-    margin-bottom:0;
-    height:48px;
-    width:100%;
-}
-
-.top-menu ul {
-    margin-top:0;
-    padding:6px 0 10px;
-}
-
-.top-menu li {
-    display:inline-block;
-}
-
-.top-menu li:last-child a {
-    margin-right:0;
-    padding-right:0;
-}
-
-.top-menu a {
-    border-bottom:none;
-    color:#fff;
-    display:block;
-    font-size:1em;
-    margin-right:20px;
-    margin-top:0;
-    padding:6px 6px 15px 0;
-    text-decoration:none;
-}
-
-.top-menu a:hover {
-    border-bottom:none;
-    color:gainsboro;
-}   
- 
-
 .zeiten table {
     left:50%;
-	vertical-align:middle;
+    vertical-align:middle;
 }
 
 .zeiten td {
     background-color:#D0F0FF;
-    font-size:large;
+    font-size:1.3em;
     font-weight:bold;
     margin: 0.1em;
     padding-left:10px;
     padding-right:10px;  
-	text-align:center;
+    text-align:center;
 }
 
 .zeiten td.ex {
-	font-weight: normal;
+    font-weight: normal;
 }
 
 .zeiten th {
     background-color:#A0B0BB;
     color:#F0F0F0;
-    font-size:large;
+    font-size:1.3em;
     font-weight:bold;
     margin: 0.1em;
     padding-left:10px;
     padding-right:10px;  
-	text-align:center;
+    text-align:center;
 }
 
 .vacation table {
     left:50%;
-	vertical-align:middle;
+    vertical-align:middle;
 }
-	
+    
 .vacation td {
     margin:0.1em;
     padding-left:0;

@@ -1,6 +1,6 @@
 /*
  * Author:   A. Luedecke
- * Purpose:  Hide context menue to prevent downloads
+ * Purpose:  Hide context menu to prevent downloads
  * Created:  Sep/29/2016
  */
 
