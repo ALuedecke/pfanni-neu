@@ -41,7 +41,7 @@
     }
     
     .visible {
-        position:fixed;
+        position:sticky;
     }
 
     .responsive {

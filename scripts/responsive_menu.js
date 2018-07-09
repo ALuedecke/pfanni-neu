@@ -4,7 +4,6 @@
  * Created:  Jul/05/2018
  */
 
-
 function showResMenu() {
     var x = document.getElementById("res_menu");
     
