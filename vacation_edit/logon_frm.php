@@ -24,17 +24,31 @@
 		  <table>
 		    <tr>
 	          <td>Username:</td>
-	          <td><input name="loginname"></td>
+	          <td>
+                <input name="loginname"
+                  <?php 
+                    if (isset($_POST["loginname"])) {
+                        echo 'value="' . $_POST["loginname"] . '"';
+                    }
+                  ?>>
+              </td>
 	        </tr>
 	        <tr>
 	          <td>Passwort:</td>
-	          <td><input name="loginpw" type="password"></td>
+	          <td>
+                <input name="loginpw" type="password"
+                <?php
+                  if (isset($_POST["loginpw"])) {
+                    echo 'value="' . $_POST["loginpw"] . '"';
+                  }
+                ?>>
+              </td>
 	        </tr>
 		    <tr>
 	          <td></td>
 	          <td style="text-align:right">
-			    <input type="submit" name="submit" value="Logon">
-                <input type="button" name="exit" value="Exit" onclick="JavaScript:self.close()">
+			    <input type="submit" name="submit" value="Anmelden">
+                <input type="button" name="exit" value="Beenden" onclick="JavaScript:self.close()">
               </td>
 	        </tr>
 		  </table>		  

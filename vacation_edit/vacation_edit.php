@@ -1,39 +1,53 @@
 <?php 
-    session_start(); 
+/*
+ * Author:   A. Luedecke
+ * Purpose:  Log on to edit vacation entries
+ * Created:  Jul/12/2018
+ */
+    
+  session_start(); 
 
-    $_logindaten[0]["name"]     = "Corinna";
-    $_logindaten[0]["passwort"] = "Corinna?";
-    $_logindaten[1]["name"]     = "Thomas";
-    $_logindaten[1]["passwort"] = "Thomas!002";
-    $_logindaten[2]["name"]     = "ALuedecke";
-    $_logindaten[2]["passwort"] = "laydas";
-	
-	//ARRAY("name"=>"Corinna", "passwort"=>"Corinna?"); 
+  # Fix credentials
+  $_credentials = '[
+    {
+      "name": "Corinna",
+      "password": "Corinna?"
+    },
+    {
+      "name": "Thomas",
+      "password": "Thomas!002"
+    },
+    {
+      "name": "ALuedecke",
+      "password": "laydas"
+    }   
+  ]';
 
-    if (isset($_POST["loginname"]) && isset($_POST["loginpw"])) {
-        for ($i = 0; $i < 3; $i++) {
-		  if ($_logindaten[$i]["name"] == $_POST["loginname"] && 
-            $_logindaten[$i]["passwort"] == $_POST["loginpw"]) { 
-            # Userdaten korrekt - User ist eingeloggt 
-            # Login merken ! 
-            $_SESSION["login"] = 1;
-			break;
-          } else {
-			  $_SESSION["login"] = 0;
-		  }
-		}
+  if (isset($_POST["loginname"]) && isset($_POST["loginpw"])) {
+    $logondata = json_decode($_credentials);
+    foreach ($logondata as $logon) {
+      if ($logon->name == $_POST["loginname"] &&
+          $logon->password == $_POST["loginpw"]) {
+        # Credentials are proper
+        # keep Login
+        $_SESSION["login"] = 1;
+        break;
+      } else {
+          $_SESSION["login"] = 0;
+      }
     }
+  }
 
-    if (isset($_SESSION["login"])) {
-	    if ($_SESSION["login"] != 1) {
-			include("logon_frm.php");
-			exit;
-        }
-    } else {
-		include("logon_frm.php");
-        exit; 
-	}
+  if (isset($_SESSION["login"])) {
+    if ($_SESSION["login"] != 1) {
+      include("logon_frm.php");
+	  exit;
+    }
+  } else {
+      include("logon_frm.php");
+      exit; 
+  }
 	
-    # User ist eingeloggt 
-	include("vacation_get.php");
+  # User is logged in
+  include("vacation_get.php");
 ?>

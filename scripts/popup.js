@@ -12,7 +12,7 @@ function popup(url, properties) {
     }
 
     pop = window.open(url, 'newwindow', properties + ', left=100, top=100');
-    focus();
+    pop.focus();
         
     return (pop) ? false : true;
 }
