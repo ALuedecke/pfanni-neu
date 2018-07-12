@@ -4,6 +4,7 @@
  * Purpose:  Display vacations and holidays
  * Created:  Jun/23/2018
  */
+ 
   $html          = '';
   $idx           = 0;
   $note          = false;
@@ -16,10 +17,13 @@
   $subst3_txt    = '';
   $subst_table   = '<table class="vacation"><tr><td>:subst1:</td><td>:subst2:</td><td>:subst3:</td></tr></table>';
   $vacation      = false;
-  $vacation_file = 'vacation.txt';
+  $vacation_file = 'vacation_edit/vacation.alv';
   
   if (!file_exists($vacation_file)) {
-    die("ERROR: File $vacation_file is not present!");
+    $vacation_file = 'vacation.alv';
+    if (!file_exists($vacation_file)) {
+      die("ERROR: File $vacation_file is not present!");
+    }
   }
 
   $out = file($vacation_file);
@@ -143,5 +147,6 @@
       }
     }
   }
+  
   echo $html;
 ?>
