@@ -18,7 +18,7 @@
         <img class="icon"
              src="res/arzt_icon.jpg"
              alt="icon"
-             ondblclick="popup('vacation_edit/logon_frm.php', 'width=1024, height=768')"> Kinderarztpraxis Dr. med. Thomas Pfannschmidt
+             ondblclick="popup('vacation_edit/vacation_modify.php', 'width=1024, height=768')"> Kinderarztpraxis Dr. med. Thomas Pfannschmidt
     </h2>
     <div class="top-menu">
         <img src="res/menu_icon.jpg" alt="menu" onclick="showResMenu()">

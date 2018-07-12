@@ -2,7 +2,7 @@
 /*
  * Author:   A. Luedecke
  * Purpose:  Display vacations and holidays
- * Created:  Jun/23/2018
+ * Created:  Jul/11/2018
  */
 
   function uml_replace($str) {
@@ -33,27 +33,34 @@
   $json_data = json_decode($data);
   
   if ($json_data->vacation->display == 1) {
-    $html = '<b>' . $json_data->vacation->label . '</b><br />';
+    $html = '<b>' . uml_replace($json_data->vacation->label) . '</b><br />';
 
     foreach ($json_data->vacation->times as $time) {
       $html = $html . uml_replace($time) . '<br />';
     }
+
     $html = $html . '<br /><br />';
+  
+    foreach ($json_data->substitution as $substitute) {
+      if ($substitute->display == 1) {
+        $subst = $subst . '<td><b>' . uml_replace($substitute->label) . '<br />';
+        $subst = $subst . uml_replace($substitute->time) . '</b><br /><br />';
+        $subst = $subst . uml_replace($substitute->name) . '<br />';
+        $subst = $subst . uml_replace($substitute->street) . '<br />';
+        $subst = $subst . uml_replace($substitute->location) . '<br /><br />';
+        $subst = $subst . uml_replace($substitute->phone) . '<br /></td>';
+      }
+    }
+
+    $subst_table = str_replace(":subst:", $subst, $subst_table);
+    $html = $html .  $subst_table . '<br /><br />';
   }
   
-  foreach ($json_data->substitution as $substitute) {
-    if ($substitute->display == 1) {
-      $subst = $subst . '<td><b>' . uml_replace($substitute->label) . '<br />';
-      $subst = $subst . uml_replace($substitute->time) . '</b><br /><br />';
-      $subst = $subst . uml_replace($substitute->name) . '<br />';
-      $subst = $subst . uml_replace($substitute->street) . '<br />';
-      $subst = $subst . uml_replace($substitute->location) . '<br /><br />';
-      $subst = $subst . uml_replace($substitute->phone) . '<br /></td>';
-    }
+  if ($json_data->note->display == 1) {
+    $html = $html . '<b>' . uml_replace($json_data->note->comment) . '</b><br />';
   }
 
-  $subst_table = str_replace(":subst:", $subst, $subst_table);
-  $html = $html .  $subst_table;
+  $html = $html . '<br />';
 
   echo $html;
 ?>

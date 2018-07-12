@@ -1,53 +1,25 @@
-<?php 
-/*
- * Author:   A. Luedecke
- * Purpose:  Log on to edit vacation entries
- * Created:  Jul/12/2018
- */
-    
-  session_start(); 
+<!DOCTYPE html>
+<html lang="de">
 
-  # Fix credentials
-  $_credentials = '[
-    {
-      "name": "Corinna",
-      "password": "Corinna?"
-    },
-    {
-      "name": "Thomas",
-      "password": "Thomas!002"
-    },
-    {
-      "name": "ALuedecke",
-      "password": "laydas"
-    }   
-  ]';
+<head>
+    <meta name="author" content="Andreas L&uuml;decke" />
+    <meta name="description" content="&Auml;nderung der Urlaubszeiten" />
+    <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin, Urlaubszeiten, &Auml;nderung der Urlaubszeiten"  />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
+    <title>Vacation Edit</title>
+    <link rel="Shortcut Icon" type="../image/x-icon" href="favicon.ico" />
+</head>
 
-  if (isset($_POST["loginname"]) && isset($_POST["loginpw"])) {
-    $logondata = json_decode($_credentials);
-    foreach ($logondata as $logon) {
-      if ($logon->name == $_POST["loginname"] &&
-          $logon->password == $_POST["loginpw"]) {
-        # Credentials are proper
-        # keep Login
-        $_SESSION["login"] = 1;
-        break;
-      } else {
-          $_SESSION["login"] = 0;
-      }
-    }
-  }
+<body style="background-color:#B0E0FF; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; width:1000px; height:700px">  
+  <div style="background-color:#FFFFFF; width:90%; height:500px;">
+    <blockquote style="font-size:small">
+      <br /><br />
+      <?php
+        include("vacation_get.php")
+      ?>
+    </blockquote>
+  </div>
+</body>
 
-  if (isset($_SESSION["login"])) {
-    if ($_SESSION["login"] != 1) {
-      include("logon_frm.php");
-	  exit;
-    }
-  } else {
-      include("logon_frm.php");
-      exit; 
-  }
-	
-  # User is logged in
-  include("vacation_get.php");
-?>
+</html>

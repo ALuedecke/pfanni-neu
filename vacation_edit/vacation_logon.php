@@ -12,7 +12,7 @@
 </head>
 
 <body style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; width:320px; height:240px">
-  <form method="POST" action="vacation_edit.php"> 
+  <form method="POST" action="vacation_modify.php"> 
     <table style="border-style:solid; border-width:1px">
 	  <tr style="background-color:#B0E0FF">
 	    <th style="text-align:center">
@@ -25,12 +25,12 @@
 		    <tr>
 	          <td>Username:</td>
 	          <td>
-                <input name="loginname"
+                <input name="loginname" type="text"
                   <?php 
                     if (isset($_POST["loginname"])) {
                         echo 'value="' . $_POST["loginname"] . '"';
                     }
-                  ?>>
+                  ?> autofocus>
               </td>
 	        </tr>
 	        <tr>
