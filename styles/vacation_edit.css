@@ -1,0 +1,24 @@
+body {
+    background-color:#D0E0FF;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.output {
+    background-color:#FFFFFF;
+    font-size:small;
+}
+
+.txt {
+    width:400px;
+}
+
+.vacation table {
+    left:50%;
+    vertical-align:middle;
+}
+    
+.vacation td {
+    margin:0.1em;
+    padding-left:0;
+    padding-right:20px;  
+}

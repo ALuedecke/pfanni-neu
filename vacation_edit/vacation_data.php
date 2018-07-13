@@ -6,25 +6,52 @@
  * Created:  Jul/13/2018
  */
 
-class VacationData {
-  # Class members
-  var $html          = '';
-  var $subst         = '';
-  var $subst_table   = '<table class="vacation"><tr>:subst:</tr></table>';
-  var $vacation_file = 'vacation_edit/vacation.json';
+ class VacationData {
+   # Methods
+  function get_html($json_data) {
+    $html          = '';
+    $subst         = '';
+    $subst_table   = '<table class="vacation"><tr>:subst:</tr></table>';
   
-  # Constructor
-  function VacationData($filename) {
-    $vacation_file = $filename;
+    if ($json_data->vacation->display == 1) {
+      $html = '<b>' . $this->uml_replace($json_data->vacation->label) . '</b><br />';
+    
+      foreach ($json_data->vacation->times as $time) {
+        $html = $html . $this->uml_replace($time) . '<br />';
+      }
+    
+      $html = $html . '<br /><br />';
+      
+      foreach ($json_data->substitution as $substitute) {
+        if ($substitute->display == 1) {
+          $subst = $subst . '<td><b>' . $this->uml_replace($substitute->label) . '<br />';
+          $subst = $subst . $this->uml_replace($substitute->time) . '</b><br /><br />';
+          $subst = $subst . $this->uml_replace($substitute->name) . '<br />';
+          $subst = $subst . $this->uml_replace($substitute->street) . '<br />';
+          $subst = $subst . $this->uml_replace($substitute->location) . '<br /><br />';
+          $subst = $subst . $this->uml_replace($substitute->phone) . '<br /></td>';
+        }
+      }
+    
+      $subst_table = str_replace(":subst:", $subst, $subst_table);
+      $html = $html .  $subst_table . '<br /><br />';
+    }
+      
+    if ($json_data->note->display == 1) {
+      $html = $html . '<b>' . $this->uml_replace($json_data->note->comment) . '</b><br />';
+    }
+    
+    $html = $html . '<br />';
+
+    return $html;
   }
 
-  # Methods
-  function getJson() {
-    if (!file_exists($vacation_file)) {
-        die("ERROR: File $vacation_file is not present!");
+  function get_json($file) {
+    if (!file_exists($file)) {
+      die("ERROR: File $file is not present!");
     }
 
-    $data = file_get_contents($vacation_file);
+    $data = file_get_contents($file);
     return json_decode($data);
   }
 
