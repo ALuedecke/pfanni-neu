@@ -14,22 +14,22 @@
     $subst_table   = '<table class="vacation"><tr>:subst:</tr></table>';
   
     if ($json_data->vacation->display == 1) {
-      $html = '<b>' . $this->uml_replace($json_data->vacation->label) . '</b><br />';
+      $html = '<b>' . $this->uml_replace($json_data->vacation->label) . '<br /><div style="font-family:Courier">';
     
       foreach ($json_data->vacation->times as $time) {
         $html = $html . $this->uml_replace($time) . '<br />';
       }
     
-      $html = $html . '<br /><br />';
+      $html = $html . '</div></b><br /><br />';
       
       foreach ($json_data->substitution as $substitute) {
         if ($substitute->display == 1) {
           $subst = $subst . '<td><b>' . $this->uml_replace($substitute->label) . '<br />';
-          $subst = $subst . $this->uml_replace($substitute->time) . '</b><br /><br />';
+          $subst = $subst . $this->uml_replace($substitute->time) . '<br /><br /><div style="font-family:Courier">';
           $subst = $subst . $this->uml_replace($substitute->name) . '<br />';
           $subst = $subst . $this->uml_replace($substitute->street) . '<br />';
           $subst = $subst . $this->uml_replace($substitute->location) . '<br /><br />';
-          $subst = $subst . $this->uml_replace($substitute->phone) . '<br /></td>';
+          $subst = $subst . $this->uml_replace($substitute->phone) . '</div></b></td>';
         }
       }
     
@@ -55,6 +55,20 @@
     return json_decode($data);
   }
 
+  function save_json($json_data, $file) {
+    if ($fh = fopen($file, 'w')) {
+        $locked = flock($fh, LOCK_EX);
+  
+        if ($locked) {
+            fwrite($fh, $json_data);
+        }
+        flock($fh, LOCK_UN);
+        fclose($fh);
+    } else {
+        die("ERROR: Can not open file $ip_log");
+    }
+  }
+
   function uml_replace($str) {
     $retval = str_replace(" ", "&nbsp;", $str);
     $retval = str_replace("Ä", "&Auml;", $retval);
@@ -66,6 +80,5 @@
 
     return $retval;
   }
-
 }
 ?>

@@ -45,7 +45,7 @@
         <div>
             <textarea class="txt"
                       id="txt_vac" name="txt_vac"
-                      rows="4"><?php
+                      rows="3"><?php
                                  foreach ($json->vacation->times as $time) {
                                    echo $time . "\r";
                                  }
