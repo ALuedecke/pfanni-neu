@@ -9,19 +9,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
     <title>Logon</title>
     <link rel="Shortcut Icon" type="../image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" media="screen" href="../styles/vacation_edit.css" type="text/css" />
 </head>
 
-<body style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; width:320px; height:240px">
-  <form method="POST" action="vacation_modify.php"> 
-    <table style="border-style:solid; border-width:1px">
-	  <tr style="background-color:#B0E0FF">
-	    <th style="text-align:center">
+<body>
+  <form  class="logon" method="POST" action="vacation_modify.php"> 
+    <table>
+	  <tr>
+	    <th>
 		  <h3>Vacation Edit - Logon</h3>
 		</th>
 	  </tr>
 	  <tr>
 	    <td>
-		  <table>
+		  <table class="ctl">
 		    <tr>
 	          <td>Username:</td>
 	          <td>

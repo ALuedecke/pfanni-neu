@@ -1,8 +1,7 @@
 <?php
 /*
  * Author:   A. Luedecke
- * Purpose:  Class module for read/write
- *           vacation data in json format
+ * Purpose:  Class module for read/write vacation data in json format
  * Created:  Jul/13/2018
  */
 

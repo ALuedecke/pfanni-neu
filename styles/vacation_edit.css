@@ -1,6 +1,70 @@
-body {
-    background-color:#FDFFD0;
+/*
+ * Author:   A. Luedecke
+ * Purpose:  Index styles for diffrent devices
+ * Created:  Jun/19/2018
+ */
+
+ body {
+    background-color:#F0FFFF;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+div.address {
+    background-color:#FFFFFF;
+    border-color:#808080;
+    border-style:solid;
+    border-width:1px;
+}
+
+div.buttons {
+    position:absolute;
+    bottom:10px;
+    right:10px;  
+}
+
+fieldset {
+    background-color:#B0E0FF;
+}
+
+label {
+    font-size:small;
+    font-weight:bold;
+}
+
+label.display {
+    font-size:small;
+    font-weight:normal;
+}
+
+.area {
+    border-color:#808080;
+    border-style:solid;
+    border-width:1px;
+    font-family:'Courier New', Courier, monospace;
+    font-size:small;
+    width:300px;
+}
+
+.logon table {
+    background-color:#F0F0F0;
+    border-style:solid;
+    border-width:1px;
+}
+
+.logon table.ctl {
+    border-style:none;
+}
+
+.logon th {
+    background-color:#B0E0FF;
+    text-align:center;
+}
+
+.note {
+    border-color:#808080;
+    border-style:solid;
+    border-width:1px;
+    width:920px;
 }
 
 .output {
@@ -8,8 +72,18 @@ body {
     font-size:small;
 }
 
+.output h2 {
+    background-color:#FFF0D0;
+    color: #802000;
+    text-align:center;
+}
+
 .txt {
-    width:400px;
+    background-color:#F0F0F0;
+    border-style:none;
+    font-family:'Courier New', Courier, monospace;
+    font-size:small;
+    width:300px;
 }
 
 .vacation table {

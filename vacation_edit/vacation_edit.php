@@ -26,10 +26,10 @@
 
       $data = new VacationData();
       $json = $data->get_json($vacation_file);
+      $idx  = 0;
     ?>
     <fieldset>
         <legend>Urlaubsplanung</legend>
-        <br />
         <div>
             <label>Urlaub:</label>
             <input type="checkbox" id="chk_vac" name="chk_vac"
@@ -40,26 +40,97 @@
                     echo 'value="0"';
                 }
               ?>>
-            <label for="chk_vac">anzeigen</label>
+            <label class="display" for="chk_vac">anzeigen</label>
         </div>
         <div>
-            <textarea class="txt"
+            <textarea class="area"
                       id="txt_vac" name="txt_vac"
-                      rows="3"><?php
+                      rows="2"><?php
                                  foreach ($json->vacation->times as $time) {
                                    echo $time . "\r";
                                  }
                                ?>
             </textarea>
         </div>
-
+        <table>
+            <tr>
+                <?php foreach($json->substitution as $subst): ?>
+                <td>
+                    <div>
+                        <label>Urlaubsvertretung <?php echo $idx + 1 ?>:</label>
+                        <input type="checkbox" 
+                        <?php
+                          echo 'id="chk_subst'. $idx .'" name="chk_subst' . $idx . '" '; 
+                          if ($subst->display == 1) {
+                            echo 'value="1" checked';
+                          } else {
+                            echo 'value="0"';
+                          }
+                        ?>>
+                        <label class="display" 
+                          <?php 
+                            echo 'for="chk_subst' . $idx . '"';
+                          ?>>anzeigen</label>
+                    </div>
+                    <div class="address">
+                        <input class="txt" type="text" 
+                          <?php
+                            echo 'name="txt_subst_time'. $idx . '" value="' . $subst->time . '"';
+                          ?>><br />
+                        <input class="txt" type="text" 
+                          <?php
+                            echo 'name="txt_subst_name' . $idx . '" value="' . $subst->name . '"';
+                          ?>><br />
+                        <input class="txt" type="text" 
+                          <?php
+                            echo 'name="txt_subst_street' . $idx . '" value="' . $subst->street . '"';
+                          ?>><br />
+                        <input class="txt" type="text" 
+                          <?php
+                            echo 'name="txt_subst_location' . $idx . '" value="' . $subst->location . '"';
+                          ?>><br />
+                        <input class="txt" type="text" 
+                          <?php
+                            echo 'name="txt_subst_phone' . $idx . '" value="' . $subst->phone . '"';
+                            $idx++;
+                          ?>>
+                    </div>
+                </td>
+                <?php endforeach; ?>
+            </tr>
+        </table>
+        <div>
+            <label>Bemerkung:</label>
+            <input type="checkbox" id="chk_note" name="chk_note"
+              <?php
+                if ($json->note->display == 1) {
+                  echo 'value="1" checked';
+                } else {
+                    echo 'value="0"';
+                }
+              ?>>
+              <label class="display" for="chk_note">anzeigen</label>
+        </div>
+        <div>
+            <input class="note" type="text" name="txt_note" 
+              <?php
+                echo 'value="' . $json->note->comment . '"';
+              ?>>
+        </div>
     </fieldset>
     <div class="output">
         <blockquote>
-            <br /><br />
+            <br />
+            <h2>P r e v i e w</h2>
+            <br />
             <?php echo $data->get_html($json); ?>
             <br />
         </blockquote>
+    </div>
+    <div class="buttons">
+        <input type="button" name="refresh" value="Aktualisieren" onclick="JavaScript:self.close()">
+        <input type="button" name="save" value="Speichern" onclick="JavaScript:self.close()">
+        <input type="button" name="exit" value="Beenden" onclick="JavaScript:self.close()">
     </div>
 </body>
 
