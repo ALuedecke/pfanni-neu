@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <form  class="logon" method="POST" action="vacation_modify.php"> 
+  <form  class="logon" method="POST" action="vacation_modify.php">
     <table>
 	  <tr>
 	    <th>

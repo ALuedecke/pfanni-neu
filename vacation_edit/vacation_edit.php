@@ -1,3 +1,26 @@
+<?php 
+      include("vacation_data.php");
+      $vacation_file = 'vacation_edit/vacation.json';
+  
+      if (!file_exists($vacation_file)) {
+        $vacation_file = 'vacation.json';
+        if (!file_exists($vacation_file)) {
+          die("ERROR: File $vacation_file is not present!");
+        }
+      }
+
+      $data = new VacationData();
+      $json = $data->get_json($vacation_file);
+      $idx  = 0;
+
+      if (isset($_POST["refresh"])) {
+        if (isset($_POST["chk_vac"])) {
+            $json->vacation->display = 1;
+        } else {
+            $json->vacation->display = 0;
+        }
+      }
+?>
 <!DOCTYPE html>
 <html lang="de">
 
@@ -13,21 +36,8 @@
 </head>
 
 <body>
-    <?php 
-      include("vacation_data.php");
-      $vacation_file = 'vacation_edit/vacation.json';
-  
-      if (!file_exists($vacation_file)) {
-        $vacation_file = 'vacation.json';
-        if (!file_exists($vacation_file)) {
-          die("ERROR: File $vacation_file is not present!");
-        }
-      }
+    <form method="POST" action="vacation_edit.php">
 
-      $data = new VacationData();
-      $json = $data->get_json($vacation_file);
-      $idx  = 0;
-    ?>
     <fieldset>
         <legend>Urlaubsplanung</legend>
         <div>
@@ -128,10 +138,12 @@
         </blockquote>
     </div>
     <div class="buttons">
-        <input type="button" name="refresh" value="Aktualisieren" onclick="JavaScript:self.close()">
+        <input type="submit" name="refresh" value="Aktualisieren">
         <input type="button" name="save" value="Speichern" onclick="JavaScript:self.close()">
         <input type="button" name="exit" value="Beenden" onclick="JavaScript:self.close()">
     </div>
+    
+    </form>
 </body>
 
 </html>
