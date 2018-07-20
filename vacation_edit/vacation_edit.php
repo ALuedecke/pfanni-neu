@@ -9,16 +9,38 @@
         }
       }
 
+      # get vacation data from json file
       $data = new VacationData();
       $json = $data->get_json($vacation_file);
       $idx  = 0;
 
+      # if form was submitted overwrite json with controls data
       if (isset($_POST["refresh"])) {
         if (isset($_POST["chk_vac"])) {
             $json->vacation->display = 1;
         } else {
             $json->vacation->display = 0;
         }
+        
+        if (isset($POST_["chk_subst"][0])) {
+          $json->substitution[0]->display = 1;
+        } else {
+            $json->substitution[0]->display = 0;
+        }
+        
+
+        if (isset($_POST["chk_note"])) {
+            $json->note->display = 1;
+        } else {
+            $json->note->display = 0;
+        }
+
+        if (isset($_POST["txt_note"])) {
+            $json->note->comment = $_POST["txt_note"];
+        }
+
+        # reset ctl-index
+        $idx  = 0;
       }
 ?>
 <!DOCTYPE html>
@@ -56,8 +78,14 @@
             <textarea class="area"
                       id="txt_vac" name="txt_vac"
                       rows="2"><?php
+                                 $first = true;
                                  foreach ($json->vacation->times as $time) {
-                                   echo $time . "\r";
+                                   if ($first) {
+                                     echo $time;
+                                     $first = false;
+                                   } else {
+                                       echo PHP_EOL . $time;
+                                   }
                                  }
                                ?>
             </textarea>
@@ -70,7 +98,7 @@
                         <label>Urlaubsvertretung <?php echo $idx + 1 ?>:</label>
                         <input type="checkbox" 
                         <?php
-                          echo 'id="chk_subst'. $idx .'" name="chk_subst' . $idx . '" '; 
+                          echo 'name="chk_subst[' . $idx . ']" '; 
                           if ($subst->display == 1) {
                             echo 'value="1" checked';
                           } else {
@@ -79,7 +107,7 @@
                         ?>>
                         <label class="display" 
                           <?php 
-                            echo 'for="chk_subst' . $idx . '"';
+                            echo 'for="chk_subst"';
                           ?>>anzeigen</label>
                     </div>
                     <div class="address">
@@ -131,7 +159,7 @@
     <div class="output">
         <blockquote>
             <br />
-            <h2>P r e v i e w</h2>
+            <h2>V O R S C H A U</h2>
             <br />
             <?php echo $data->get_html($json); ?>
             <br />
