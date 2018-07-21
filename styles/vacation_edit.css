@@ -42,7 +42,7 @@ label.display {
     border-width:1px;
     font-family:'Courier New', Courier, monospace;
     font-size:small;
-    width:300px;
+    width:745px;
 }
 
 .logon table {
@@ -64,7 +64,7 @@ label.display {
     border-color:#808080;
     border-style:solid;
     border-width:1px;
-    width:920px;
+    width:1125px;
 }
 
 .output {
@@ -83,7 +83,7 @@ label.display {
     border-style:none;
     font-family:'Courier New', Courier, monospace;
     font-size:small;
-    width:300px;
+    width:370px;
 }
 
 .vacation table {

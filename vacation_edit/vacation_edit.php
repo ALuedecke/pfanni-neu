@@ -1,47 +1,110 @@
-<?php 
-      include("vacation_data.php");
-      $vacation_file = 'vacation_edit/vacation.json';
+<?php
+  header("Content-type:text/html; charset=utf-8");
+  include("vacation_data.php");
+  $vacation_file = 'vacation_edit/vacation.json';
   
-      if (!file_exists($vacation_file)) {
-        $vacation_file = 'vacation.json';
-        if (!file_exists($vacation_file)) {
-          die("ERROR: File $vacation_file is not present!");
-        }
-      }
+  if (!file_exists($vacation_file)) {
+    $vacation_file = 'vacation.json';
+    if (!file_exists($vacation_file)) {
+      die("ERROR: File $vacation_file is not present!");
+    }
+  }
 
-      # get vacation data from json file
-      $data = new VacationData();
-      $json = $data->get_json($vacation_file);
+  # get vacation data from json file
+  $data = new VacationData();
+  $json = $data->get_json($vacation_file);
+  $idx  = 0;
+
+  # overwrite json with controls data
+  function set_posted($json) {
+    #control index
+    $idx = 0;
+
+    # vacation data
+    if (isset($_POST["chk_vac"])) {
+      $json->vacation->display = 1;
+    } else {
+        $json->vacation->display = 0;
+    }
+      
+    # substitution data
+    # reset all checkboxes first
+    foreach ($json->substitution as $subst) {
+      $subst->display = 0;
+    }
+    # display
+    if (isset($_POST["chk_subst"])) {
+      # set checkboxes with posted data
+      foreach($_POST["chk_subst"] as $val) {
+        $json->substitution[intval($val)]->display = 1;
+      }  
+    }
+    # time
+    if (isset($_POST["txt_subst_time"])) {
+      foreach($_POST["txt_subst_time"] as $val) {
+        $json->substitution[$idx]->time = $val;
+        $idx++;
+      }
+      # reset ctl-index
       $idx  = 0;
-
-      # if form was submitted overwrite json with controls data
-      if (isset($_POST["refresh"])) {
-        if (isset($_POST["chk_vac"])) {
-            $json->vacation->display = 1;
-        } else {
-            $json->vacation->display = 0;
-        }
-        
-        if (isset($POST_["chk_subst"][0])) {
-          $json->substitution[0]->display = 1;
-        } else {
-            $json->substitution[0]->display = 0;
-        }
-        
-
-        if (isset($_POST["chk_note"])) {
-            $json->note->display = 1;
-        } else {
-            $json->note->display = 0;
-        }
-
-        if (isset($_POST["txt_note"])) {
-            $json->note->comment = $_POST["txt_note"];
-        }
-
-        # reset ctl-index
-        $idx  = 0;
+    }
+    # name
+    if (isset($_POST["txt_subst_name"])) {
+      foreach($_POST["txt_subst_name"] as $val) {
+        $json->substitution[$idx]->name = $val;
+        $idx++;
       }
+      # reset ctl-index
+      $idx  = 0;
+    }
+    # street
+    if (isset($_POST["txt_subst_street"])) {
+      foreach($_POST["txt_subst_street"] as $val) {
+        $json->substitution[$idx]->street = $val;
+        $idx++;
+      }
+      # reset ctl-index
+      $idx  = 0;
+    }
+    # location
+    if (isset($_POST["txt_subst_location"])) {
+      foreach($_POST["txt_subst_location"] as $val) {
+        $json->substitution[$idx]->location = $val;
+        $idx++;
+      }
+       # reset ctl-index
+       $idx  = 0;
+    }
+    # phone
+    if (isset($_POST["txt_subst_phone"])) {
+      foreach($_POST["txt_subst_phone"] as $val) {
+        $json->substitution[$idx]->phone = $val;
+        $idx++;
+      }
+      # reset ctl-index
+      $idx  = 0;
+    }
+
+    # note
+    if (isset($_POST["chk_note"])) {
+      $json->note->display = 1;
+    } else {
+        $json->note->display = 0;
+    }
+    if (isset($_POST["txt_note"])) {
+        $json->note->comment = $_POST["txt_note"];
+    }     
+  }
+
+  # if form was submitted overwrite json with controls data
+  if (isset($_POST["refresh"])) {
+    set_posted($json);
+  }
+  # save data if submitted for save
+  if (isset($_POST["save"])) {
+    set_posted($json);
+    $data->save_json($json, $vacation_file);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -52,7 +115,7 @@
     <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin, Urlaubszeiten, &Auml;nderung der Urlaubszeiten"  />
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
-    <title>Vacation Edit</title>
+    <title>Vacation Edit - Version 1.0.0</title>
     <link rel="Shortcut Icon" type="../image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_edit.css" type="text/css" />
 </head>
@@ -96,40 +159,36 @@
                 <td>
                     <div>
                         <label>Urlaubsvertretung <?php echo $idx + 1 ?>:</label>
-                        <input type="checkbox" 
+                        <input type="checkbox" name="chk_subst[]"
                         <?php
-                          echo 'name="chk_subst[' . $idx . ']" '; 
                           if ($subst->display == 1) {
-                            echo 'value="1" checked';
+                            echo 'value="' . $idx. '" checked';
                           } else {
-                            echo 'value="0"';
+                            echo 'value="' . $idx. '"';
                           }
                         ?>>
-                        <label class="display" 
-                          <?php 
-                            echo 'for="chk_subst"';
-                          ?>>anzeigen</label>
+                        <label class="display" for="chk_subst[]">anzeigen</label>
                     </div>
                     <div class="address">
-                        <input class="txt" type="text" 
+                        <input class="txt" type="text" name="txt_subst_time[]" 
                           <?php
-                            echo 'name="txt_subst_time'. $idx . '" value="' . $subst->time . '"';
+                            echo 'value="' . $subst->time . '"';
                           ?>><br />
-                        <input class="txt" type="text" 
+                        <input class="txt" type="text" name="txt_subst_name[]" 
                           <?php
-                            echo 'name="txt_subst_name' . $idx . '" value="' . $subst->name . '"';
+                            echo 'value="' . $subst->name . '"';
                           ?>><br />
-                        <input class="txt" type="text" 
+                        <input class="txt" type="text" name="txt_subst_street[]" 
                           <?php
-                            echo 'name="txt_subst_street' . $idx . '" value="' . $subst->street . '"';
+                            echo 'value="' . $subst->street . '"';
                           ?>><br />
-                        <input class="txt" type="text" 
+                        <input class="txt" type="text" name="txt_subst_location[]" 
                           <?php
-                            echo 'name="txt_subst_location' . $idx . '" value="' . $subst->location . '"';
+                            echo 'value="' . $subst->location . '"';
                           ?>><br />
-                        <input class="txt" type="text" 
+                        <input class="txt" type="text" name="txt_subst_phone[]" 
                           <?php
-                            echo 'name="txt_subst_phone' . $idx . '" value="' . $subst->phone . '"';
+                            echo 'value="' . $subst->phone . '"';
                             $idx++;
                           ?>>
                     </div>
@@ -167,7 +226,7 @@
     </div>
     <div class="buttons">
         <input type="submit" name="refresh" value="Aktualisieren">
-        <input type="button" name="save" value="Speichern" onclick="JavaScript:self.close()">
+        <input type="submit" name="save" value="Speichern">
         <input type="button" name="exit" value="Beenden" onclick="JavaScript:self.close()">
     </div>
     

@@ -59,7 +59,7 @@
         $locked = flock($fh, LOCK_EX);
   
         if ($locked) {
-            fwrite($fh, $json_data);
+            fwrite($fh, json_encode($json_data));
         }
         flock($fh, LOCK_UN);
         fclose($fh);
