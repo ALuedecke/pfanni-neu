@@ -11,7 +11,7 @@ function popup(url, properties) {
         pop.close();
     }
 
-    pop = window.open(url, 'newwindow', properties + ', resizable=0, left=200, top=100');
+    pop = window.open(url, 'newwindow', properties + ', resizable=0, left=200, top=20');
     pop.focus();
         
     return (pop) ? false : true;

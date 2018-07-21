@@ -1,4 +1,11 @@
 <?php
+/*
+ * Author:   A. Luedecke
+ * Purpose:  Edit vacations and holidays
+ *           with HTML Form
+ * Created:  Jul/21/2018
+ */
+
   header("Content-type:text/html; charset=utf-8");
   include("vacation_data.php");
   $vacation_file = 'vacation_edit/vacation.json';
