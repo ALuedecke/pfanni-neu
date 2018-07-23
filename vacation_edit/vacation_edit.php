@@ -24,16 +24,30 @@
 
   # overwrite json with controls data
   function set_posted($json) {
-    #control index
+    #ctl-index
     $idx = 0;
 
     # vacation data
+    # display
     if (isset($_POST["chk_vac"])) {
       $json->vacation->display = 1;
     } else {
         $json->vacation->display = 0;
     }
-      
+    # times
+    if (isset($_POST["txt_vac"])) {
+      $text = explode(PHP_EOL, $_POST["txt_vac"]);
+      # reset times array first
+      $json->vacation->times = array();
+      # fill posted lines into times
+      foreach($text as $line) {
+        $json->vacation->times[$idx] = $line;
+        $idx++;
+      }
+      # reset ctl-index
+      $idx  = 0;
+    }
+
     # substitution data
     # reset all checkboxes first
     foreach ($json->substitution as $subst) {
