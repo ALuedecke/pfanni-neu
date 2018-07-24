@@ -37,7 +37,9 @@
     }
       
     if ($json_data->note->display == 1) {
-      $html = $html . '<b>' . $this->uml_replace($json_data->note->comment) . '</b><br />';
+      foreach($json_data->note->comments as $comment) {
+        $html = $html . '<b>' . $this->uml_replace($comment) . '</b><br />';  
+      }
     }
     
     $html = $html . '<br />';
@@ -76,6 +78,7 @@
     $retval = str_replace("ä", "&auml;", $retval);
     $retval = str_replace("ö", "&ouml;", $retval);
     $retval = str_replace("ü", "&uuml;", $retval);
+    $retval = str_replace("ß", "&szlig;", $retval);
 
     return $retval;
   }

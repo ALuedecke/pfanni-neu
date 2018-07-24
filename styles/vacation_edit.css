@@ -1,6 +1,6 @@
 /*
  * Author:   A. Luedecke
- * Purpose:  Index styles for diffrent devices
+ * Purpose:  styles for vacation edit form
  * Created:  Jun/19/2018
  */
 
@@ -42,7 +42,7 @@ label.display {
     border-width:1px;
     font-family:'Courier New', Courier, monospace;
     font-size:small;
-    width:745px;
+    width:370px;
 }
 
 .logon table {
@@ -64,7 +64,7 @@ label.display {
     border-color:#808080;
     border-style:solid;
     border-width:1px;
-    width:1125px;
+    width:1128px;
 }
 
 .output {

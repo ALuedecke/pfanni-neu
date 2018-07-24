@@ -22,7 +22,7 @@
   $json = $data->get_json($vacation_file);
   $idx  = 0;
 
-  # overwrite json with controls data
+  # function to overwrite json with controls data
   function set_posted($json) {
     #ctl-index
     $idx = 0;
@@ -41,7 +41,7 @@
       $json->vacation->times = array();
       # fill posted lines into times
       foreach($text as $line) {
-        $json->vacation->times[$idx] = $line;
+        $json->vacation->times[$idx] = rtrim($line);
         $idx++;
       }
       # reset ctl-index
@@ -112,9 +112,19 @@
     } else {
         $json->note->display = 0;
     }
+    # comments
     if (isset($_POST["txt_note"])) {
-        $json->note->comment = $_POST["txt_note"];
-    }     
+      $text = explode(PHP_EOL, $_POST["txt_note"]);
+      # reset comments array first
+      $json->note->comments = array();
+      # fill posted lines into comments
+      foreach($text as $line) {
+        $json->note->comments[$idx] = rtrim($line);
+        $idx++;
+      }
+      # reset ctl-index
+      $idx  = 0;
+    }  
   }
 
   # if form was submitted overwrite json with controls data
@@ -137,7 +147,7 @@
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
     <title>Vacation Edit - Version 1.0.0</title>
-    <link rel="Shortcut Icon" type="../image/x-icon" href="favicon.ico" />
+    <link rel="Shortcut Icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_edit.css" type="text/css" />
 </head>
 
@@ -161,18 +171,19 @@
         <div>
             <textarea class="area"
                       id="txt_vac" name="txt_vac"
-                      rows="2"><?php
-                                 $first = true;
-                                 foreach ($json->vacation->times as $time) {
-                                   if ($first) {
-                                     echo $time;
-                                     $first = false;
-                                   } else {
-                                       echo PHP_EOL . $time;
-                                   }
-                                 }
-                               ?>
-            </textarea>
+                      cols="35"
+                      rows="3"
+            ><?php
+               $first = true;
+               foreach ($json->vacation->times as $time) {
+                 if ($first) {
+                   echo $time;
+                   $first = false;
+                 } else {
+                     echo PHP_EOL . $time;
+                 }
+               }
+             ?></textarea>
         </div>
         <table>
             <tr>
@@ -230,10 +241,21 @@
               <label class="display" for="chk_note">anzeigen</label>
         </div>
         <div>
-            <input class="note" type="text" name="txt_note" 
-              <?php
-                echo 'value="' . $json->note->comment . '"';
-              ?>>
+            <textarea class="note"
+                      id="txt_note" name="txt_note"
+                      cols="120"
+                      rows="4"
+            ><?php
+               $first = true;
+               foreach ($json->note->comments as $comment) {
+                 if ($first) {
+                   echo $comment;
+                   $first = false;
+                 } else {
+                     echo PHP_EOL . $comment;
+                 }
+               }
+             ?></textarea>
         </div>
     </fieldset>
     <div class="output">

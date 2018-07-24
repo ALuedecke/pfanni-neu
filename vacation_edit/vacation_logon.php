@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
     <title>Logon</title>
-    <link rel="Shortcut Icon" type="../image/x-icon" href="favicon.ico" />
+    <link rel="Shortcut Icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_edit.css" type="text/css" />
 </head>
 
