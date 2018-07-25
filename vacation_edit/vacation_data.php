@@ -66,7 +66,7 @@
         flock($fh, LOCK_UN);
         fclose($fh);
     } else {
-        die("ERROR: Can not open file $ip_log");
+        die("ERROR: Can not open file $file");
     }
   }
 
