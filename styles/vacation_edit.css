@@ -36,6 +36,10 @@ label.display {
     font-weight:normal;
 }
 
+option {
+    background-color:#000000;
+    color:#00E080;
+}
 .area {
     border-color:#808080;
     border-style:solid;
@@ -43,6 +47,10 @@ label.display {
     font-family:'Courier New', Courier, monospace;
     font-size:small;
     width:370px;
+}
+
+.invisible {
+    display:none; 
 }
 
 .logon table {

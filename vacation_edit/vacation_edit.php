@@ -8,8 +8,16 @@
 
   header("Content-type:text/html; charset=utf-8");
   include("vacation_data.php");
+  $address_file = 'vacation_edit/vacation_subst_address.json';
   $vacation_file = 'vacation_edit/vacation.json';
   
+  # check whether json files exist
+  if (!file_exists($address_file)) {
+    $address_file = 'vacation_subst_address.json';
+    if (!file_exists($address_file)) {
+      die("ERROR: File $address_file is not present!");
+    }
+  }
   if (!file_exists($vacation_file)) {
     $vacation_file = 'vacation.json';
     if (!file_exists($vacation_file)) {
@@ -17,10 +25,12 @@
     }
   }
 
-  # get vacation data from json file
-  $data = new VacationData();
-  $json = $data->get_json($vacation_file);
-  $idx  = 0;
+  # get vacation data ans addresses from json files
+  $data     = new VacationData();
+  $json_adr = $data->get_json($address_file);
+  $json     = $data->get_json($vacation_file);
+  $idx_adr  = 0;
+  $idx      = 0;
 
   # function to overwrite json with controls data
   function set_posted($json) {
@@ -187,7 +197,7 @@
         </div>
         <table>
             <tr>
-                <?php foreach($json->substitution as $subst): ?>
+              <?php foreach($json->substitution as $subst): ?>
                 <td>
                     <div>
                         <label>Urlaubsvertretung <?php echo $idx + 1 ?>:</label>
@@ -206,10 +216,25 @@
                           <?php
                             echo 'value="' . $subst->time . '"';
                           ?>><br />
-                        <input class="txt" type="text" name="txt_subst_name[]" 
+                        <input class="invisible" type="text" name="txt_subst_name[]" 
                           <?php
                             echo 'value="' . $subst->name . '"';
-                          ?>><br />
+                          ?>>
+                        <select class="txt" name="cmb_subst_name[]">
+                          <?php foreach($json_adr->address as $adr): ?>
+                            <option
+                              <?php
+                                echo 'value="' . $idx_adr . '"';
+                                if ($adr->name == $subst->name) {
+                                  echo ' selected';
+                                }
+                              ?>><?php 
+                                   echo $adr->name;
+                                   $idx_adr++
+                                 ?>
+                            </option>
+                          <?php endforeach; $idx_adr = 0; ?>
+                        </select><br />
                         <input class="txt" type="text" name="txt_subst_street[]" 
                           <?php
                             echo 'value="' . $subst->street . '"';
@@ -225,7 +250,7 @@
                           ?>>
                     </div>
                 </td>
-                <?php endforeach; ?>
+              <?php endforeach; ?>
             </tr>
         </table>
         <div>
