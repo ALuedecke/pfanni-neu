@@ -162,7 +162,7 @@
 </head>
 
 <body>
-    <form method="POST" action="vacation_edit.php">
+    <form name="frm_edit" method="POST" action="vacation_edit.php">
 
     <fieldset>
         <legend>Urlaubsplanung</legend>
