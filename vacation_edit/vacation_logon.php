@@ -48,8 +48,8 @@
 		    <tr>
 	          <td></td>
 	          <td style="text-align:right">
-			    <input type="submit" name="submit" value="Anmelden">
-                <input type="button" name="exit" value="Beenden" onclick="JavaScript:self.close()">
+			    <input class="btn" type="submit" name="submit" value="Anmelden">
+                <input class="btn" type="button" name="exit" value="Beenden" onclick="JavaScript:self.close()">
               </td>
 	        </tr>
 		  </table>		  
