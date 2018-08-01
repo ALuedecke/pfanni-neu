@@ -6,7 +6,15 @@
  */
 
  class VacationData {
-   # Methods
+  # Methods
+  function get_content($file) {
+    if (!file_exists($file)) {
+      die("ERROR: File $file is not present!");
+    }
+
+    return file_get_contents($file);
+  }
+
   function get_html($json_data) {
     $html          = '';
     $subst         = '';

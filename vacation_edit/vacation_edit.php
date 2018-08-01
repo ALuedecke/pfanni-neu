@@ -25,7 +25,7 @@
     }
   }
 
-  # get vacation data ans addresses from json files
+  # get vacation data and addresses from json files
   $data     = new VacationData();
   $json_adr = $data->get_json($address_file);
   $json     = $data->get_json($vacation_file);
@@ -137,9 +137,13 @@
     }  
   }
 
-  # if form was submitted overwrite json with controls data
+  # if form was submitted for refresh, overwrite json with controls data
   if (isset($_POST["refresh"])) {
     set_posted($json);
+  }
+  # reset data if submitted for reset
+  if (isset($_POST["reset"])) {
+    # do nothing
   }
   # save data if submitted for save
   if (isset($_POST["save"])) {
@@ -162,7 +166,23 @@
 </head>
 
 <body>
-    <form name="frm_edit" method="POST" action="vacation_edit.php">
+    <script type="text/javascript">
+        var subst = <?php echo $data->get_content($address_file); ?>;
+
+        function handle_select_onchange(ctl_idx, adr_idx) {
+            var frm      = document.getElementById("frm_edit");
+            var location = frm.elements["txt_subst_location[]"];
+            var name     = frm.elements["txt_subst_name[]"];
+            var phone    = frm.elements["txt_subst_phone[]"];
+            var street   = frm.elements["txt_subst_street[]"];
+            
+            location[ctl_idx].value = subst.address[adr_idx].location;
+            name[ctl_idx].value     = subst.address[adr_idx].name;
+            phone[ctl_idx].value    = subst.address[adr_idx].phone;
+            street[ctl_idx].value   = subst.address[adr_idx].street;
+        }
+    </script>
+    <form id="frm_edit" method="POST" action="vacation_edit.php">
 
     <fieldset>
         <legend>Urlaubsplanung</legend>
@@ -204,9 +224,9 @@
                         <input type="checkbox" name="chk_subst[]"
                         <?php
                           if ($subst->display == 1) {
-                            echo 'value="' . $idx. '" checked';
+                            echo 'value="' . $idx . '" checked';
                           } else {
-                            echo 'value="' . $idx. '"';
+                            echo 'value="' . $idx . '"';
                           }
                         ?>>
                         <label class="display" for="chk_subst[]">anzeigen</label>
@@ -220,7 +240,8 @@
                           <?php
                             echo 'value="' . $subst->name . '"';
                           ?>>
-                        <select class="txt" name="cmb_subst_name[]">
+                        <select class="txt" name="cmb_subst_name[]" 
+                                onchange=<?php echo '"handle_select_onchange(' .  $idx . ', this.value)"'?>>
                           <?php foreach($json_adr->address as $adr): ?>
                             <option
                               <?php
@@ -294,6 +315,7 @@
     </div>
     <div class="buttons">
         <input type="submit" name="refresh" value="Aktualisieren">
+        <input type="submit" name="reset" value="Zurücksetzen">
         <input type="submit" name="save" value="Speichern">
         <input type="button" name="exit" value="Beenden" onclick="JavaScript:self.close()">
     </div>
