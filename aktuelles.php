@@ -15,7 +15,10 @@
 
 <body>
     <h2 class="title">
-        <img class="icon" src="res/arzt_icon.jpg" alt="icon"> Kinderarztpraxis Dr. med. Thomas Pfannschmidt
+        <img class="icon"
+             src="res/arzt_icon.jpg"
+             alt="icon"
+             ondblclick="popup('vacation_edit/vacation_modify.php', 'width=1192, height=880')"> Kinderarztpraxis Dr. med. Thomas Pfannschmidt
     </h2>
     <div class="top-menu">
         <img src="res/menu_icon.jpg" alt="menu" onclick="showResMenu()">
@@ -85,7 +88,7 @@
                             <p style="color:#800000; font-weight:bold;">
                                 Bitte beachten Sie, dass eine halbe Stunde vor Sprechstundenende die Patientenannahme schließt!</p>
                             <p>&nbsp;</p>
-                            <?php include("scripts/vacation.php"); ?>
+                            <?php include("vacation_edit/vacation_get.php"); ?>
                         </blockquote>
                     </div>
                     <p>&nbsp;</p>
@@ -95,6 +98,7 @@
         </tr>
     </table>
     <script async type="text/javascript" src="scripts/responsive_menu.js"></script>
+    <script async type="text/javascript" src="scripts/popup.js"></script>
 </body>
 
 </html>
