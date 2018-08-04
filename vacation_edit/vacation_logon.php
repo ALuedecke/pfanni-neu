@@ -59,10 +59,10 @@
   </form>
   <?php
     if (isset($_SESSION["login"])) {
-	  if ($_SESSION["login"] != 1) {
-	    echo '<div style="color:#A00000; font-weight:bold;"><br />Username/Passwort nicht korrekt!</div>';
-	  }
-	}
+	    if ($_SESSION["login"] != 1) {
+	      echo '<div style="color:#A00000; font-weight:bold;"><br />Username/Passwort nicht korrekt!</div>';
+      }
+    }
   ?>
 </body>
 
