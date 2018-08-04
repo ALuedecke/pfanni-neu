@@ -6,16 +6,6 @@
  * Created:  Jul/21/2018
  */
   
-  # check whether session will expire
-  $expire = ($_SESSION["duration"] - time()) / 60;
-
-  if($expire <= 0) {
-    session_destroy();
-    exit;
-  } else {
-    session_start();
-  }
-
   header("Content-type:text/html; charset=utf-8");
   include("vacation_data.php");
   $address_file = 'vacation_edit/vacation_subst_address.json';
@@ -359,9 +349,6 @@
     
     </form>
 
-    <div class="session">
-      Die Session l&auml;uft in <?php echo number_format($expire); ?> Minuten ab
-    </div>
     <div class="stamp">
         &copy; A. Luedecke 08/2018
     </div>

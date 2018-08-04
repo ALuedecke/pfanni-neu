@@ -31,7 +31,7 @@
         # Credentials are proper
         # Keep login
         $_SESSION["login"] = 1;
-        $_SESSION["duration"] = time() + 60; # 30 mim
+        $_SESSION["duration"] = time() + 1800; # 30 mim
         break;
       } else {
           $_SESSION["login"] = 0;
@@ -39,6 +39,13 @@
     }
   }
 
+  if (isset($_SESSION["duration"])) {
+    if ($_SESSION["duration"] - time() <= 0) {
+      # Session has expierd
+      include("vacation_logon.php");
+	    exit;
+    }
+  }
   if (isset($_SESSION["login"])) {
     if ($_SESSION["login"] != 1) {
       include("vacation_logon.php");
