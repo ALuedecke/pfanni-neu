@@ -5,6 +5,16 @@
  *           with HTML Form
  * Created:  Jul/21/2018
  */
+  
+  # check whether session will expire
+  $expire = ($_SESSION["duration"] - time()) / 60;
+
+  if($expire <= 0) {
+    session_destroy();
+    exit;
+  } else {
+    session_start();
+  }
 
   header("Content-type:text/html; charset=utf-8");
   include("vacation_data.php");
@@ -25,14 +35,21 @@
     }
   }
 
+  # form button settings
+  $buttons = array(
+    "btn_refresh" => "disabled",
+    "btn_reset"   => "disabled",
+    "btn_save"    => "disabled"
+  );
   # get vacation data and addresses from json files
   $data     = new VacationData();
   $json_adr = $data->get_json($address_file);
   $json     = $data->get_json($vacation_file);
+  # index variables
   $idx_adr  = 0;
   $idx      = 0;
 
-  # function to overwrite json with controls data
+  # method to overwrite json with controls data
   function set_posted($json) {
     #ctl-index
     $idx = 0;
@@ -138,15 +155,17 @@
   }
 
   # if form was submitted for refresh, overwrite json with controls data
-  if (isset($_POST["refresh"])) {
+  if (isset($_POST["btn_refresh"])) {
     set_posted($json);
+    $buttons["btn_reset"] = "";
+    $buttons["btn_save"]  = "";
   }
   # reset data if submitted for reset
-  if (isset($_POST["reset"])) {
+  if (isset($_POST["btn_reset"])) {
     # do nothing
   }
   # save data if submitted for save
-  if (isset($_POST["save"])) {
+  if (isset($_POST["btn_save"])) {
     set_posted($json);
     $data->save_json($json, $vacation_file);
   }
@@ -160,7 +179,7 @@
     <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin, Urlaubszeiten, &Auml;nderung der Urlaubszeiten"  />
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
-    <title>Vacation Edit - Version 1.0.1</title>
+    <title>Vacation Edit - Version 1.0.2</title>
     <link rel="Shortcut Icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_edit.css" type="text/css" />
 </head>
@@ -180,6 +199,22 @@
             name[ctl_idx].value     = subst.address[adr_idx].name;
             phone[ctl_idx].value    = subst.address[adr_idx].phone;
             street[ctl_idx].value   = subst.address[adr_idx].street;
+
+            set_buttons(true, true, false);
+        }
+
+        function set_buttons(refresh, reset, save) {
+          var frm = document.getElementById("frm_edit");
+          
+          if (frm.elements["btn_refresh"].disabled == refresh) {
+            frm.elements["btn_refresh"].disabled = !refresh;
+          }
+          if (frm.elements["btn_reset"].disabled == reset) {
+            frm.elements["btn_reset"].disabled = !reset;
+          }
+          if (frm.elements["btn_save"].disabled == save) {
+            frm.elements["btn_save"].disabled = !save;
+          }
         }
     </script>
     <form id="frm_edit" method="POST" action="vacation_edit.php">
@@ -195,7 +230,7 @@
                 } else {
                     echo 'value="0"';
                 }
-              ?>>
+              ?> onclick="set_buttons(true, true, false)">
             <label class="display" for="chk_vac">anzeigen</label>
         </div>
         <div>
@@ -203,6 +238,7 @@
                       id="txt_vac" name="txt_vac"
                       cols="35"
                       rows="3"
+                      onchange="set_buttons(true, true, false)"
             ><?php
                $first = true;
                foreach ($json->vacation->times as $time) {
@@ -228,14 +264,14 @@
                           } else {
                             echo 'value="' . $idx . '"';
                           }
-                        ?>>
+                        ?> onclick="set_buttons(true, true, false)">
                         <label class="display" for="chk_subst[]">anzeigen</label>
                     </div>
                     <div class="address">
                         <input class="txt" type="text" name="txt_subst_time[]" 
                           <?php
                             echo 'value="' . $subst->time . '"';
-                          ?>><br />
+                          ?> onchange="set_buttons(true, true, false)"><br />
                         <input class="invisible" type="text" name="txt_subst_name[]" 
                           <?php
                             echo 'value="' . $subst->name . '"';
@@ -259,16 +295,16 @@
                         <input class="txt" type="text" name="txt_subst_street[]" 
                           <?php
                             echo 'value="' . $subst->street . '"';
-                          ?>><br />
+                          ?> onchange="set_buttons(true, true, false)"><br />
                         <input class="txt" type="text" name="txt_subst_location[]" 
                           <?php
                             echo 'value="' . $subst->location . '"';
-                          ?>><br />
+                          ?> onchange="set_buttons(true, true, false)"><br />
                         <input class="txt" type="text" name="txt_subst_phone[]" 
                           <?php
                             echo 'value="' . $subst->phone . '"';
                             $idx++;
-                          ?>>
+                          ?> onchange="set_buttons(true, true, false)">
                     </div>
                 </td>
               <?php endforeach; ?>
@@ -283,7 +319,7 @@
                 } else {
                     echo 'value="0"';
                 }
-              ?>>
+              ?> onclick="set_buttons(true, true, false)">
               <label class="display" for="chk_note">anzeigen</label>
         </div>
         <div>
@@ -291,6 +327,7 @@
                       id="txt_note" name="txt_note"
                       cols="120"
                       rows="4"
+                      onchange="set_buttons(true, true, false)"
             ><?php
                $first = true;
                foreach ($json->note->comments as $comment) {
@@ -314,13 +351,20 @@
         </blockquote>
     </div>
     <div class="buttons">
-        <input type="submit" name="refresh" value="Aktualisieren">
-        <input type="submit" name="reset" value="Zurücksetzen">
-        <input type="submit" name="save" value="Speichern">
-        <input type="button" name="exit" value="Beenden" onclick="JavaScript:self.close()">
+        <input type="submit" name="btn_refresh" value="Aktualisieren" <?php echo $buttons["btn_refresh"] ?>>
+        <input type="submit" name="btn_reset" value="Zurücksetzen" <?php echo $buttons["btn_reset"] ?>>
+        <input type="submit" name="btn_save" value="Speichern" <?php echo $buttons["btn_save"] ?>>
+        <input type="button" name="btn_exit" value="Beenden" onclick="JavaScript:self.close()">
     </div>
     
     </form>
+
+    <div class="session">
+      Die Session l&auml;uft in <?php echo number_format($expire); ?> Minuten ab
+    </div>
+    <div class="stamp">
+        &copy; A. Luedecke 08/2018
+    </div>
 </body>
 
 </html>
