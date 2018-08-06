@@ -1,8 +1,7 @@
 <?php
 /*
  * Author:   A. Luedecke
- * Purpose:  Edit vacations and holidays
- *           with HTML Form
+ * Purpose:  Edit vacations and holidays with HTML Form
  * Created:  Jul/21/2018
  */
   

@@ -31,7 +31,8 @@
         # Credentials are proper
         # Keep login
         $_SESSION["login"] = 1;
-        $_SESSION["duration"] = time() + 1800; # 30 mim
+        #Setting session duration to 30 minutes
+        $_SESSION["duration"] = time() + 1800;
         break;
       } else {
           $_SESSION["login"] = 0;
@@ -39,6 +40,7 @@
     }
   }
 
+  # Check whether session will expire
   if (isset($_SESSION["duration"])) {
     if ($_SESSION["duration"] - time() <= 0) {
       # Session has expierd
@@ -46,6 +48,7 @@
 	    exit;
     }
   }
+
   if (isset($_SESSION["login"])) {
     if ($_SESSION["login"] != 1) {
       include("vacation_logon.php");
