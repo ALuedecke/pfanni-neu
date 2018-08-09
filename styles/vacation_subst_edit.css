@@ -3,9 +3,48 @@
  * Purpose:  styles for substitution edit form
  * Created:  Aug/08/2018
  */
+ 
 body {
     background-color:#F0FFFF;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+div.buttons {
+    position:absolute;
+    bottom:10px;
+    right:10px;  
+}
+
+div.stamp {
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    font-size:x-small;
+}
+
+fieldset {
+    background-color:#B0E0FF;
+}
+
+label {
+    font-size:small;
+}
+
+.ctls {
+    width:50%;
+}
+
+.ctls td {
+    width:65%;   
+}
+
+.ctls td.btn {
+    width:20%;
+    text-align:right;
+}
+
+.ctls td.lbl {
+    width:15%;
 }
 
 .grid {
@@ -65,4 +104,14 @@ body {
     padding-left:10px;
     padding-right:25px;
     width:25%;
+}
+
+.txt {
+    background-color:#F0F0F0;
+    border-style:solid;
+    border-width:1px;
+    font-family:'Courier New', Courier, monospace;
+    font-size:small;
+    height:17px;
+    width:100%;
 }

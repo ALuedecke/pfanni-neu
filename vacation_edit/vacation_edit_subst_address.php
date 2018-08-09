@@ -52,6 +52,56 @@
             row[adr_idx].className = "selected";
         }
     </script>
+    <form id="frm_edit" method="POST" action="vacation_edit_subst_address.php">
+    
+    <fieldset>
+        <legend>Urlaubsvertretung - Adressen</legend>
+        <div>
+            <table class="ctls">
+                <tr>
+                    <td class="lbl"><label for="txt_name">Name:</label></td>
+                    <td><input autofocus
+                               class="txt" 
+                               name="txt_name"
+                               placeholder="Name"
+                               required
+                               type="text"
+                               value=""></td>
+                    <td class="btn"><input type="button" name="btn_new" value="Neuer Eintrag"></td>
+                </tr>
+                <tr>
+                    <td class="lbl"><label for="txt_str">Stra&szlig;e:</label></td>
+                    <td><input class="txt"
+                               name="txt_str"
+                               placeholder="Stra&szlig;e"
+                               required
+                               type="text"
+                               value=""></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="lbl"><label for="txt_location">PLZ Ort:</label></td>
+                    <td><input class="txt"
+                               name="txt_location"
+                               type="text"
+                               placeholder="PLZ Ort"
+                               required
+                               value=""></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="lbl"><label for="txt_phone">Telefon:</label></td>
+                    <td><input class="txt"
+                               name="txt_phone"
+                               type="text"
+                               placeholder="Tel. Vorw. Nummer"
+                               required
+                               value=""></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </fieldset><br />
     <div class="head">
         <table>
             <tr>
@@ -75,6 +125,18 @@
           <?php endforeach; $idx_adr = 0; ?>
         </table>
     </div>
+    <div class="buttons">
+        <input type="button"
+               name="btn_exit"
+               value="Zur&uuml;ck"
+               onclick="popup('vacation_edit.php', '')">
+    </div>
+    
+    </form>
+    <div class="stamp">
+        &copy; A. Luedecke 08/2018
+    </div>
+    <script async type="text/javascript" src="../scripts/popup.js"></script>
 </body>
 
 </html>

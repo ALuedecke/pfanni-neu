@@ -228,6 +228,7 @@
                       cols="35"
                       rows="3"
                       onchange="set_buttons(true, true, false)"
+                      autofocus
             ><?php
                $first = true;
                foreach ($json->vacation->times as $time) {
@@ -239,8 +240,14 @@
                  }
                }
              ?></textarea>
+            <input class="editaddress"
+                   type="button"
+                   name="btn_address"
+                   value="Adressen Bearbeiten"
+                   onclick="popup('vacation_edit_subst_address.php', '')">
         </div>
-        <table>
+        <div>
+          <table class="ctls">
             <tr>
               <?php foreach($json->substitution as $subst): ?>
                 <td>
@@ -298,7 +305,8 @@
                 </td>
               <?php endforeach; ?>
             </tr>
-        </table>
+          </table>
+        </div>
         <div>
             <label>Bemerkung:</label>
             <input type="checkbox" id="chk_note" name="chk_note"
@@ -347,10 +355,10 @@
     </div>
     
     </form>
-
     <div class="stamp">
         &copy; A. Luedecke 08/2018
     </div>
+    <script async type="text/javascript" src="../scripts/popup.js"></script>
 </body>
 
 </html>
