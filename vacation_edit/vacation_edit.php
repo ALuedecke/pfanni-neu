@@ -173,7 +173,7 @@
     <link rel="stylesheet" media="screen" href="../styles/vacation_edit.css" type="text/css" />
 </head>
 
-<body>
+<body onload="select_txt('txt_vac')">
     <script type="text/javascript">
         var subst = <?php echo $data->get_content($address_file); ?>;
 
@@ -193,17 +193,24 @@
         }
 
         function set_buttons(refresh, reset, save) {
-          var frm = document.getElementById("frm_edit");
+            var frm = document.getElementById("frm_edit");
           
-          if (frm.elements["btn_refresh"].disabled == refresh) {
-            frm.elements["btn_refresh"].disabled = !refresh;
-          }
-          if (frm.elements["btn_reset"].disabled == reset) {
-            frm.elements["btn_reset"].disabled = !reset;
-          }
-          if (frm.elements["btn_save"].disabled == save) {
-            frm.elements["btn_save"].disabled = !save;
-          }
+            if (frm.elements["btn_refresh"].disabled == refresh) {
+                frm.elements["btn_refresh"].disabled = !refresh;
+            }
+            if (frm.elements["btn_reset"].disabled == reset) {
+                frm.elements["btn_reset"].disabled = !reset;
+            }
+            if (frm.elements["btn_save"].disabled == save) {
+                frm.elements["btn_save"].disabled = !save;
+            }
+        }
+
+        function select_txt(ctl_name) {
+            var frm = document.getElementById("frm_edit");
+
+            frm.elements[ctl_name].focus();
+            frm.elements[ctl_name].setSelectionRange(0, frm.elements[ctl_name].value.length);
         }
     </script>
     <form id="frm_edit" method="POST" action="vacation_edit.php">

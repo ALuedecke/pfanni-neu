@@ -17,12 +17,21 @@
     }
   }
   
+  # form button settings
+  $buttons = array(
+    "btn_delete" => "",
+    "btn_reset"  => "disabled",
+    "btn_save"   => "disabled"
+  );
   # get addresses from json file
   $data     = new VacationData();
   $json_adr = $data->get_json($address_file);
-
   # index variables
   $idx_adr  = 0;
+
+  if (isset($_POST["txt_idx"])) {
+    $idx_adr = $_POST["txt_idx"];
+  }
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -38,11 +47,43 @@
     <link rel="stylesheet" media="screen" href="../styles/vacation_subst_edit.css" type="text/css" />
 </head>
 
-<body onload="set_active_row(1); set_ctls(1);">
+<body onload=<?php
+               if ($idx_adr == 0) {
+                 echo '"set_active_row(1); set_ctls(1);"';
+               } else {
+                   echo '"set_active_row(' . $idx_adr . '); set_ctls(' . $idx_adr . ');"';
+                  $idx_adr = 0;
+               }
+             ?>>
     <script type="text/javascript">
+        function get_sel_idx() {
+            var idx = 0;
+            var tbl = document.getElementById("grid_subst");
+            var row = tbl.getElementsByTagName('TR');
+            
+            // find row where class = selected
+            for (var i = 0; i < row.length; i++) {
+                if (row[i].className == "selected") {
+                    idx = i;
+                    break;
+                }
+            }
+            return i;
+        }
+
         function handle_tr_onclick(adr_idx) {
-            set_active_row(adr_idx);
-            set_ctls(adr_idx)
+            if (adr_idx == 0) {
+                set_new();
+                set_buttons(false, true, false);
+            } else {
+                set_active_row(adr_idx);
+                set_ctls(adr_idx);
+                set_buttons(true, false, false);
+            }
+        }
+
+        function handle_txt_onchange() {
+            set_buttons(true, true, true);
         }
 
         function set_active_row(adr_idx) {
@@ -78,9 +119,37 @@
                         break;
                 }
             }
-
+            
+            frm.elements["txt_idx"].value = adr_idx;
             frm.elements["txt_name"].focus();
             frm.elements["txt_name"].setSelectionRange(0, frm.elements["txt_name"].value.length);
+        }
+
+        function set_buttons(del, reset, save) {
+            var frm = document.getElementById("frm_edit");
+          
+            if (frm.elements["btn_del"].disabled == del) {
+                frm.elements["btn_del"].disabled = !del;
+            }
+            if (frm.elements["btn_reset"].disabled == reset) {
+                frm.elements["btn_reset"].disabled = !reset;
+            }
+            if (frm.elements["btn_save"].disabled == save) {
+                frm.elements["btn_save"].disabled = !save;
+            }
+        }
+
+        function set_new() {
+            var tbl = document.getElementById("grid_subst");
+            var row = tbl.getElementsByTagName('TR');
+            var frm = document.getElementById("frm_edit");
+
+            frm.elements["txt_idx"].value = row.length;
+            frm.elements["txt_location"].value = "";
+            frm.elements["txt_name"].value = "";
+            frm.elements["txt_name"].focus();
+            frm.elements["txt_phone"].value = "";
+            frm.elements["txt_str"].value = "";
         }
     </script>
     <form id="frm_edit" method="POST" action="vacation_edit_subst_address.php">
@@ -88,6 +157,7 @@
     <fieldset>
         <legend>Urlaubsvertretung - Adressen</legend>
         <div>
+            <input class="invisible" name="txt_idx" value="0">
             <table class="ctls">
                 <tr>
                     <td class="lbl"><label for="txt_name">Name:</label></td>
@@ -97,7 +167,8 @@
                                placeholder="Name"
                                required
                                type="text"
-                               value=""></td>
+                               value=""
+                               onchange="handle_txt_onchange()"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -107,7 +178,8 @@
                                placeholder="Stra&szlig;e"
                                required
                                type="text"
-                               value=""></td>
+                               value=""
+                               onchange="handle_txt_onchange()"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -117,7 +189,8 @@
                                type="text"
                                placeholder="PLZ Ort"
                                required
-                               value=""></td>
+                               value=""
+                               onchange="handle_txt_onchange()"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -127,7 +200,8 @@
                                type="text"
                                placeholder="Tel. Vorw. Nummer"
                                required
-                               value=""></td>
+                               value=""
+                               onchange="handle_txt_onchange()"></td>
                     <td></td>
                 </tr>
             </table>
@@ -157,14 +231,11 @@
         </table>
     </div>
     <div class="buttons">
-        <input type="button" name="btn_new" value="Neu">
-        <input type="submit" name="btn_del" value="L&ouml;schen">
-        <input type="submit" name="btn_reset" value="Zurücksetzen">
-        <input type="submit" name="btn_save" value="Speichern">
-        <input type="button"
-               name="btn_exit"
-               value="Schlie&szlig;en"
-               onclick="popup('vacation_edit.php', '')">
+        <input type="button" name="btn_new" value="Neu" onclick="set_new(); set_buttons(false, true, false);">
+        <input type="submit" name="btn_del" value="L&ouml;schen" <?php echo $buttons["btn_delete"] ?>>
+        <input type="button" name="btn_reset" value="Zurücksetzen" onclick="set_ctls(get_sel_idx()); set_buttons(true, false, false);" <?php echo $buttons["btn_reset"] ?>>
+        <input type="submit" name="btn_save" value="Speichern" <?php echo $buttons["btn_save"] ?>>
+        <input type="button" name="btn_exit" value="Schlie&szlig;en" onclick="popup('vacation_edit.php', '')">
     </div>
     
     </form>

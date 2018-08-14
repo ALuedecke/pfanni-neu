@@ -103,8 +103,12 @@ label {
     width:25%;
 }
 
+.invisible {
+    display:none; 
+}
+
 .txt {
-    background-color:#F0F0F0;
+    background-color:#FFFFF8;
     border-style:solid;
     border-width:1px;
     font-family:'Courier New', Courier, monospace;
