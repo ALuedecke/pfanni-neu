@@ -29,18 +29,23 @@
 
 <head>
     <meta name="author" content="Andreas L&uuml;decke" />
-    <meta name="description" content="&Auml;nderung der Urlaubszeiten" />
+    <meta name="description" content="&Auml;nderung der Urlaubsvertretungen" />
     <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin, Urlaubsvertretungen, &Auml;nderung der Urlaubsvertretungen"  />
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
-    <title>Substitutions Edit - Version 1.0.0</title>
+    <title>Vacation Edit - Version 1.1.0</title>
     <link rel="Shortcut Icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_subst_edit.css" type="text/css" />
 </head>
 
-<body>
+<body onload="set_active_row(1); set_ctls(1);">
     <script type="text/javascript">
         function handle_tr_onclick(adr_idx) {
+            set_active_row(adr_idx);
+            set_ctls(adr_idx)
+        }
+
+        function set_active_row(adr_idx) {
             var tbl = document.getElementById("grid_subst");
             var row = tbl.getElementsByTagName('TR');
             
@@ -50,6 +55,32 @@
             }
             // then set selected row
             row[adr_idx].className = "selected";
+        }
+
+        function set_ctls(adr_idx) {
+            var tbl = document.getElementById("grid_subst");
+            var row = tbl.getElementsByTagName('TR');
+            var frm = document.getElementById("frm_edit");
+
+            for (var i = 0; i < row[adr_idx].cells.length; i++) {
+                switch (i) {
+                    case 0:
+                        frm.elements["txt_name"].value = row[adr_idx].cells[i].innerHTML;
+                        break;
+                    case 1:
+                        frm.elements["txt_str"].value = row[adr_idx].cells[i].innerHTML;
+                        break;
+                    case 2:
+                        frm.elements["txt_location"].value = row[adr_idx].cells[i].innerHTML;
+                        break;
+                    case 3:
+                        frm.elements["txt_phone"].value = row[adr_idx].cells[i].innerHTML;
+                        break;
+                }
+            }
+
+            frm.elements["txt_name"].focus();
+            frm.elements["txt_name"].setSelectionRange(0, frm.elements["txt_name"].value.length);
         }
     </script>
     <form id="frm_edit" method="POST" action="vacation_edit_subst_address.php">
@@ -67,7 +98,7 @@
                                required
                                type="text"
                                value=""></td>
-                    <td class="btn"><input type="button" name="btn_new" value="Neuer Eintrag"></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="lbl"><label for="txt_str">Stra&szlig;e:</label></td>
@@ -117,18 +148,22 @@
           <?php foreach($json_adr->address as $adr): ?>
             <tr name="row_subst[]"
                 onclick=<?php echo '"handle_tr_onclick(' . $idx_adr++ . ')"' ?>>
-                <td><?php echo $adr->name;     ?></td>
-                <td><?php echo $adr->street;   ?></td>
-                <td><?php echo $adr->location; ?></td>
-                <td><?php echo $adr->phone;    ?></td>
+               <td><?php echo $adr->name;     ?></td>
+               <td><?php echo $adr->street;   ?></td>
+               <td><?php echo $adr->location; ?></td>
+               <td><?php echo $adr->phone;    ?></td>
             </tr>
           <?php endforeach; $idx_adr = 0; ?>
         </table>
     </div>
     <div class="buttons">
+        <input type="button" name="btn_new" value="Neu">
+        <input type="submit" name="btn_del" value="L&ouml;schen">
+        <input type="submit" name="btn_reset" value="Zurücksetzen">
+        <input type="submit" name="btn_save" value="Speichern">
         <input type="button"
                name="btn_exit"
-               value="Zur&uuml;ck"
+               value="Schlie&szlig;en"
                onclick="popup('vacation_edit.php', '')">
     </div>
     

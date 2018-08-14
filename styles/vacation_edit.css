@@ -23,6 +23,10 @@ div.buttons {
     right:10px;  
 }
 
+div.buttons input {
+    width:95px;
+}
+
 div.session {
     position:absolute;
     bottom:10px;
