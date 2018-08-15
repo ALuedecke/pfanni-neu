@@ -26,11 +26,51 @@
   # get addresses from json file
   $data     = new VacationData();
   $json_adr = $data->get_json($address_file);
-  # index variables
+  # index variable
   $idx_adr  = 0;
+  
+  # method to overwrite json with controls data
+  function set_posted($json_adr, $idx_adr) {
+    # check whether we have a new entry
+    if ($idx_adr == count($json_adr->address)) {
+      $json_adr->address[$idx_adr] = new stdClass();
+    }
+    #name
+    if (isset($_POST["txt_name"])) {
+      $json_adr->address[$idx_adr]->name = $_POST["txt_name"];
+    }
+    #street
+    if (isset($_POST["txt_str"])) {
+      $json_adr->address[$idx_adr]->street = $_POST["txt_str"];
+    }
+    #location
+    if (isset($_POST["txt_location"])) {
+      $json_adr->address[$idx_adr]->location = $_POST["txt_location"];
+    }
+    #phone
+    if (isset($_POST["txt_phone"])) {
+      $json_adr->address[$idx_adr]->phone = $_POST["txt_phone"];
+    }
+  }
 
+  # if form was submitted any way, set current address index
   if (isset($_POST["txt_idx"])) {
-    $idx_adr = $_POST["txt_idx"];
+    $idx_adr = intval($_POST["txt_idx"]);
+  }
+  # delete data if submitted for delete
+  if (isset($_POST["btn_del"])) {
+    if ($idx_adr > 0) {
+      array_splice($json_adr->address, $idx_adr, 1);
+      if ($idx_adr == count($json_adr->address)) {
+        --$idx_adr;
+      }
+    }
+    $data->save_json($json_adr, $address_file);
+  }
+  # save data if submitted for save
+  if (isset($_POST["btn_save"])) {
+    set_posted($json_adr, $idx_adr);
+    $data->save_json($json_adr, $address_file);
   }
 ?>
 <!DOCTYPE html>
@@ -42,7 +82,7 @@
     <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin, Urlaubsvertretungen, &Auml;nderung der Urlaubsvertretungen"  />
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
-    <title>Vacation Edit - Version 1.1.0</title>
+    <title>Vacation Edit - Version 1.2.0</title>
     <link rel="Shortcut Icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_subst_edit.css" type="text/css" />
 </head>
@@ -56,6 +96,22 @@
                }
              ?>>
     <script type="text/javascript">
+        // property
+        var is_dirty = false;
+        // getter
+        function get_dirty() {
+            return is_dirty;
+        }
+        // setter
+        function set_dirty(dirty) {
+            is_dirty = dirty;
+        }
+
+        // methods
+        function confirm_action(text) {
+            return confirm(text);
+        }
+
         function get_sel_idx() {
             var idx = 0;
             var tbl = document.getElementById("grid_subst");
@@ -168,7 +224,7 @@
                                required
                                type="text"
                                value=""
-                               onchange="handle_txt_onchange()"></td>
+                               onchange="handle_txt_onchange(); set_dirty(true);"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -179,7 +235,7 @@
                                required
                                type="text"
                                value=""
-                               onchange="handle_txt_onchange()"></td>
+                               onchange="handle_txt_onchange(); set_dirty(true);"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -190,7 +246,7 @@
                                placeholder="PLZ Ort"
                                required
                                value=""
-                               onchange="handle_txt_onchange()"></td>
+                               onchange="handle_txt_onchange(); set_dirty(true);"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -201,7 +257,7 @@
                                placeholder="Tel. Vorw. Nummer"
                                required
                                value=""
-                               onchange="handle_txt_onchange()"></td>
+                               onchange="handle_txt_onchange(); set_dirty(true);"></td>
                     <td></td>
                 </tr>
             </table>
@@ -232,10 +288,10 @@
     </div>
     <div class="buttons">
         <input type="button" name="btn_new" value="Neu" onclick="set_new(); set_buttons(false, true, false);">
-        <input type="submit" name="btn_del" value="L&ouml;schen" <?php echo $buttons["btn_delete"] ?>>
+        <input type="submit" name="btn_del" value="L&ouml;schen" onclick="return confirm('Eintrag wirklich l&ouml;schen?', false, false);" <?php echo $buttons["btn_delete"] ?>>
         <input type="button" name="btn_reset" value="Zurücksetzen" onclick="set_ctls(get_sel_idx()); set_buttons(true, false, false);" <?php echo $buttons["btn_reset"] ?>>
-        <input type="submit" name="btn_save" value="Speichern" <?php echo $buttons["btn_save"] ?>>
-        <input type="button" name="btn_exit" value="Schlie&szlig;en" onclick="popup('vacation_edit.php', '')">
+        <input type="submit" name="btn_save" value="Speichern" onclick="set_dirty(false);" <?php echo $buttons["btn_save"] ?>>
+        <input type="button" name="btn_exit" value="Schlie&szlig;en" onclick="if (get_dirty()) { if (confirm('&Auml;nderung(en) verwerfen?')) { popup('vacation_edit.php'); } } else { popup('vacation_edit.php'); }">
     </div>
     
     </form>
