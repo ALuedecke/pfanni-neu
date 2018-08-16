@@ -14,12 +14,17 @@ div.address {
     border-color:#808080;
     border-style:solid;
     border-width:1px;
+    width:100%;
 }
 
 div.buttons {
     position:absolute;
     bottom:10px;
     right:10px;  
+}
+
+div.buttons input {
+    width:95px;
 }
 
 div.session {
@@ -60,7 +65,21 @@ option {
     border-width:1px;
     font-family:'Courier New', Courier, monospace;
     font-size:small;
-    width:370px;
+    width:32.9%;
+}
+
+.ctls {
+    width:100%;
+}
+
+.ctls td {
+    width:33.33%;
+}
+
+.editaddress {
+    position:absolute;
+    right:25px;
+    top:105px;
 }
 
 .invisible {
@@ -113,7 +132,7 @@ option {
     border-style:none;
     font-family:'Courier New', Courier, monospace;
     font-size:small;
-    width:376px;
+    width:99.5%;
 }
 
 .vacation table {
