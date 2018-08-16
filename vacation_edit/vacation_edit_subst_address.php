@@ -108,6 +108,16 @@
         }
 
         // methods
+        function check_dirty() {
+            if (get_dirty()) {
+                if (confirm("Änderung(en) verwerfen?")) {
+                    popup("vacation_edit.php");
+                }
+            } else {
+                popup("vacation_edit.php");
+            }
+        }
+
         function confirm_action(text) {
             return confirm(text);
         }
@@ -139,7 +149,14 @@
         }
 
         function handle_txt_onchange() {
+            is_dirty = true;
             set_buttons(true, true, true);
+        }
+
+        function reset_form() {
+            set_ctls(get_sel_idx());
+            set_buttons(true, false, false);
+            set_dirty(false);
         }
 
         function set_active_row(adr_idx) {
@@ -196,6 +213,12 @@
         }
 
         function set_new() {
+            if (get_dirty()) {
+                if (!confirm("Änderung(en) verwerfen?")) {
+                    return false;
+                }
+            }
+
             var tbl = document.getElementById("grid_subst");
             var row = tbl.getElementsByTagName('TR');
             var frm = document.getElementById("frm_edit");
@@ -206,6 +229,11 @@
             frm.elements["txt_name"].focus();
             frm.elements["txt_phone"].value = "";
             frm.elements["txt_str"].value = "";
+
+            set_buttons(false, true, false);
+            set_dirty(false);
+
+            return true;
         }
     </script>
     <form id="frm_edit" method="POST" action="vacation_edit_subst_address.php">
@@ -224,7 +252,7 @@
                                required
                                type="text"
                                value=""
-                               onchange="handle_txt_onchange(); set_dirty(true);"></td>
+                               onchange="handle_txt_onchange();"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -235,7 +263,7 @@
                                required
                                type="text"
                                value=""
-                               onchange="handle_txt_onchange(); set_dirty(true);"></td>
+                               onchange="handle_txt_onchange();"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -246,7 +274,7 @@
                                placeholder="PLZ Ort"
                                required
                                value=""
-                               onchange="handle_txt_onchange(); set_dirty(true);"></td>
+                               onchange="handle_txt_onchange();"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -257,7 +285,7 @@
                                placeholder="Tel. Vorw. Nummer"
                                required
                                value=""
-                               onchange="handle_txt_onchange(); set_dirty(true);"></td>
+                               onchange="handle_txt_onchange();"></td>
                     <td></td>
                 </tr>
             </table>
@@ -277,7 +305,7 @@
         <table id="grid_subst" name="grid_subst">
           <?php foreach($json_adr->address as $adr): ?>
             <tr name="row_subst[]"
-                onclick=<?php echo '"handle_tr_onclick(' . $idx_adr++ . ')"' ?>>
+                onclick=<?php echo '"handle_tr_onclick(' . $idx_adr++ . ');"' ?>>
                <td><?php echo $adr->name;     ?></td>
                <td><?php echo $adr->street;   ?></td>
                <td><?php echo $adr->location; ?></td>
@@ -287,11 +315,11 @@
         </table>
     </div>
     <div class="buttons">
-        <input type="button" name="btn_new" value="Neu" onclick="set_new(); set_buttons(false, true, false);">
-        <input type="submit" name="btn_del" value="L&ouml;schen" onclick="return confirm('Eintrag wirklich l&ouml;schen?', false, false);" <?php echo $buttons["btn_delete"] ?>>
-        <input type="button" name="btn_reset" value="Zurücksetzen" onclick="set_ctls(get_sel_idx()); set_buttons(true, false, false);" <?php echo $buttons["btn_reset"] ?>>
+        <input type="button" name="btn_new" value="Neu" onclick="set_new();">
+        <input type="submit" name="btn_del" value="L&ouml;schen" onclick="return confirm_action('Eintrag wirklich l&ouml;schen?');" <?php echo $buttons["btn_delete"] ?>>
+        <input type="button" name="btn_reset" value="Zurücksetzen" onclick="reset_form();" <?php echo $buttons["btn_reset"] ?>>
         <input type="submit" name="btn_save" value="Speichern" onclick="set_dirty(false);" <?php echo $buttons["btn_save"] ?>>
-        <input type="button" name="btn_exit" value="Schlie&szlig;en" onclick="if (get_dirty()) { if (confirm('&Auml;nderung(en) verwerfen?')) { popup('vacation_edit.php'); } } else { popup('vacation_edit.php'); }">
+        <input type="button" name="btn_exit" value="Schlie&szlig;en" onclick="check_dirty();">
     </div>
     
     </form>
