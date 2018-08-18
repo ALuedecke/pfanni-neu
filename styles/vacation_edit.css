@@ -77,9 +77,8 @@ option {
 }
 
 .editaddress {
-    position:absolute;
-    right:25px;
-    top:105px;
+    width:100%;
+    text-align:right;
 }
 
 .invisible {

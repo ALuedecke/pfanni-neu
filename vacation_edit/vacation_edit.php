@@ -247,13 +247,18 @@
                  }
                }
              ?></textarea>
-            <input class="editaddress"
-                   type="button"
-                   name="btn_address"
-                   value="Adressen Bearbeiten"
-                   onclick="popup('vacation_edit_subst_address.php', '')">
         </div>
         <div>
+          <table class="ctls">
+            <tr>
+              <td class="editaddress">
+                  <input type="button"
+                         name="btn_address"
+                         value="Adressen Bearbeiten"
+                         onclick="popup('vacation_edit_subst_address.php', '')">
+              </td>
+            </tr>
+          </table>
           <table class="ctls">
             <tr>
               <?php foreach($json->substitution as $subst): ?>
