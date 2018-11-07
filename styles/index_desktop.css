@@ -12,8 +12,8 @@
     }
     
     h2 {
-        font-size:1.2em;
-        height:20px;
+        font-size:1.5em;
+        height:25px;
     }
     
     .active {
@@ -87,6 +87,11 @@
         color:#404060;
     }
     
+    .subst {
+        font-family:Courier;
+        font-size:1.2em;
+    }
+	
     .text {
         background-color:#F0F0F0;
         color:#404060;
@@ -200,6 +205,10 @@
 
     .responsive {
         display:none;
+    }
+
+    .subst {
+        font-family:Courier;
     }
 
     .text {

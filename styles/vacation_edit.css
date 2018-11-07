@@ -126,6 +126,10 @@ option {
     text-align:center;
 }
 
+.subst {
+    font-family:Courier;
+}
+
 .txt {
     background-color:#F0F0F0;
     border-style:none;
