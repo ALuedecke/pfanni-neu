@@ -216,9 +216,23 @@
     <form id="frm_edit" method="POST" action="vacation_edit.php">
 
     <fieldset>
-        <legend>Urlaubsplanung</legend>
+        <legend>Abwesenheitsplanung</legend>
         <div>
-            <label>Urlaub:</label>
+            <input type="radio" id="opt_vac" name="opt_vacation" value="Urlaub"
+              <?php
+                if ($json->vacation->label == 'Urlaub:') {
+                  echo 'checked';
+                }
+              ?>>
+            <label for="opt_vac">Urlaub</label>
+            <input type="radio" id="opt_misc" name="opt_vacation" value="Misc"
+              <?php
+                if ($json->vacation->label != 'Urlaub:') {
+                  echo 'checked';
+                }
+              ?>>
+            <label for="opt_misc">Sonstiger Grund</label>
+            
             <input type="checkbox" id="chk_vac" name="chk_vac"
               <?php 
                 if ($json->vacation->display == 1) {
