@@ -44,6 +44,11 @@
     $idx = 0;
 
     # vacation data
+    # label
+    if (isset($_POST["txt_vac_lbl"])) {
+      $json->vacation->label = $_POST["txt_vac_lbl"];
+    }
+  
     # display
     if (isset($_POST["chk_vac"])) {
       $json->vacation->display = 1;
@@ -216,9 +221,12 @@
     <form id="frm_edit" method="POST" action="vacation_edit.php">
 
     <fieldset>
-        <legend>Urlaubsplanung</legend>
+        <legend>Abwensenheitsplanung</legend>
         <div>
-            <label>Urlaub:</label>
+            <input class="headline" type="text" id="txt_vac_lbl" name="txt_vac_lbl" 
+              <?php
+                echo 'value="' . $json->vacation->label . '"';
+              ?> onchange="set_buttons(true, true, false)">
             <input type="checkbox" id="chk_vac" name="chk_vac"
               <?php 
                 if ($json->vacation->display == 1) {

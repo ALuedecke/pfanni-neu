@@ -81,6 +81,13 @@ option {
     text-align:right;
 }
 
+.headline {
+    background-color:#B0E0FF;
+    border-style:none;
+    font-size:small;
+    width:25.6%;
+}
+
 .invisible {
     display:none; 
 }
