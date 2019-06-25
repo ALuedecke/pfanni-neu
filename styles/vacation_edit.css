@@ -152,6 +152,7 @@ option {
 }
     
 .vacation td {
+    font-size: 1.1em;
     margin:0.15em;
     padding-left:0;
     padding-right:25px;  
