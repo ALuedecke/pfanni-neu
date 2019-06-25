@@ -89,16 +89,16 @@
     
     .subst {
         font-family:Courier;
-        font-size:1.2em;
+        font-size:1.1em;
     }
 	
     .text {
         background-color:#F0F0F0;
         color:#404060;
         font-family:Tahoma;
-        font-size:small;
+        font-size:0.9em;
         text-align:left;
-        width:825px;
+        width:815px;
     }
     
     .title {
@@ -215,7 +215,7 @@
         background-color:#F0F0F0;
         color:#404060;
         font-family:Tahoma;
-        font-size:small;
+        font-size:0.8em;
         text-align:left;
         width:1000px;
     }
@@ -303,7 +303,7 @@ img {
 
 .zeiten td {
     background-color:#D0F0FF;
-    font-size:1.3em;
+    font-size:1.2em;
     font-weight:bold;
     margin: 0.1em;
     padding-left:10px;
@@ -332,6 +332,7 @@ img {
 }
     
 .vacation td {
+    font-size: 1.1em;
     margin:0.15em;
     padding-left:0;
     padding-right:25px;  
