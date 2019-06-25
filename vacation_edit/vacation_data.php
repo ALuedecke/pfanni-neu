@@ -31,7 +31,7 @@
       
       foreach ($json_data->substitution as $substitute) {
         if ($substitute->display == 1) {
-          $subst = $subst . '<td><b>' . $this->uml_replace($substitute->label) . '<br />';
+          $subst = $subst . '<td><b>' . $this->uml_replace($substitute->label) . '<br /><br />';
           $subst = $subst . $this->uml_replace($substitute->time) . '<br /><br /><div class="subst">';
           $subst = $subst . $this->uml_replace($substitute->name) . '<br />';
           $subst = $subst . $this->uml_replace($substitute->street) . '<br />';

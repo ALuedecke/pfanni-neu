@@ -44,12 +44,17 @@
     $idx = 0;
 
     # vacation data
+    # label
+    if (isset($_POST["txt_vac_lbl"])) {
+      $json->vacation->label = $_POST["txt_vac_lbl"];
+    }
     # display
     if (isset($_POST["chk_vac"])) {
       $json->vacation->display = 1;
     } else {
         $json->vacation->display = 0;
     }
+    
     # times
     if (isset($_POST["txt_vac"])) {
       $text = explode(PHP_EOL, $_POST["txt_vac"]);
@@ -68,6 +73,15 @@
     # reset all checkboxes first
     foreach ($json->substitution as $subst) {
       $subst->display = 0;
+    }
+    # label
+    if (isset($_POST["txt_subst_lbl"])) {
+      foreach($_POST["txt_subst_lbl"] as $val) {
+        $json->substitution[$idx]->label = $val;
+        $idx++;
+      }
+      # reset ctl-index
+      $idx  = 0;
     }
     # display
     if (isset($_POST["chk_subst"])) {
@@ -164,11 +178,11 @@
 
 <head>
     <meta name="author" content="Andreas L&uuml;decke" />
-    <meta name="description" content="&Auml;nderung der Urlaubszeiten" />
+    <meta name="description" content="&Auml;nderung der Abwesenheitszeiten" />
     <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin, Urlaubszeiten, &Auml;nderung der Urlaubszeiten"  />
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
-    <title>Vacation Edit - Version 1.2.0</title>
+    <title>Vacation Edit - Version 1.3.0</title>
     <link rel="Shortcut Icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_edit.css" type="text/css" />
 </head>
@@ -216,9 +230,12 @@
     <form id="frm_edit" method="POST" action="vacation_edit.php">
 
     <fieldset>
-        <legend>Urlaubsplanung</legend>
+        <legend>Abwensenheitsplanung</legend>
         <div>
-            <label>Urlaub:</label>
+            <input class="headline" type="text" name="txt_vac_lbl"
+              <?php
+                echo 'value="' . $json->vacation->label . '"';
+              ?> onchange="set_buttons(true, true, false)">
             <input type="checkbox" id="chk_vac" name="chk_vac"
               <?php 
                 if ($json->vacation->display == 1) {
@@ -264,7 +281,10 @@
               <?php foreach($json->substitution as $subst): ?>
                 <td>
                     <div>
-                        <label>Urlaubsvertretung <?php echo $idx + 1 ?>:</label>
+                    <input class="headline" type="text" name="txt_subst_lbl[]"
+                      <?php
+                        echo 'value="' . $subst->label . '"';
+                      ?> onchange="set_buttons(true, true, false)">
                         <input type="checkbox" name="chk_subst[]"
                         <?php
                           if ($subst->display == 1) {
