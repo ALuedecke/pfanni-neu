@@ -21,7 +21,7 @@
     $subst_table   = '<table class="vacation"><tr>:subst:</tr></table>';
   
     if ($json_data->vacation->display == 1) {
-      $html = '<b>' . $this->uml_replace($json_data->vacation->label) . '<br /><div style="font-family:Courier">';
+      $html = '<b>' . $this->uml_replace($json_data->vacation->label) . '<br /><div class="subst">';
     
       foreach ($json_data->vacation->times as $time) {
         $html = $html . $this->uml_replace($time) . '<br />';
@@ -31,8 +31,8 @@
       
       foreach ($json_data->substitution as $substitute) {
         if ($substitute->display == 1) {
-          $subst = $subst . '<td><b>' . $this->uml_replace($substitute->label) . '<br />';
-          $subst = $subst . $this->uml_replace($substitute->time) . '<br /><br /><div style="font-family:Courier">';
+          $subst = $subst . '<td><b>' . $this->uml_replace($substitute->label) . '<br /><br />';
+          $subst = $subst . $this->uml_replace($substitute->time) . '<br /><br /><div class="subst">';
           $subst = $subst . $this->uml_replace($substitute->name) . '<br />';
           $subst = $subst . $this->uml_replace($substitute->street) . '<br />';
           $subst = $subst . $this->uml_replace($substitute->location) . '<br /><br />';

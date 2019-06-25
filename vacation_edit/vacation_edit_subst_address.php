@@ -78,11 +78,11 @@
 
 <head>
     <meta name="author" content="Andreas L&uuml;decke" />
-    <meta name="description" content="&Auml;nderung der Urlaubsvertretungen" />
+    <meta name="description" content="&Auml;nderung der Abwesenheitsvertretungen" />
     <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin, Urlaubsvertretungen, &Auml;nderung der Urlaubsvertretungen"  />
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
-    <title>Vacation Edit - Version 1.2.0</title>
+    <title>Vacation Edit - Version 1.3.0</title>
     <link rel="Shortcut Icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_subst_edit.css" type="text/css" />
 </head>
@@ -239,7 +239,7 @@
     <form id="frm_edit" method="POST" action="vacation_edit_subst_address.php">
     
     <fieldset>
-        <legend>Urlaubsvertretung - Adressen</legend>
+        <legend>Vertretungsregelung - Adressen</legend>
         <div>
             <input class="invisible" name="txt_idx" value="0">
             <table class="ctls">

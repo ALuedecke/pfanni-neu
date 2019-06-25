@@ -12,8 +12,8 @@
     }
     
     h2 {
-        font-size:1.2em;
-        height:20px;
+        font-size:1.5em;
+        height:25px;
     }
     
     .active {
@@ -47,7 +47,7 @@
     }
 
     .responsive {
-        max-width:200px;
+        max-width:350px;
     }
     
     .responsive li {
@@ -71,7 +71,7 @@
     .responsive a {
         color:#fff;
         display:block;
-        font-size:1em;
+        font-size:2em;
         margin-right:20px;
         margin-top:0;
         padding:6px 6px 15px 16px;
@@ -87,6 +87,11 @@
         color:#404060;
     }
     
+    .subst {
+        font-family:Courier;
+        font-size:1.2em;
+    }
+	
     .text {
         background-color:#F0F0F0;
         color:#404060;
@@ -107,15 +112,15 @@
         list-style-type:none;
         margin-top:0;
         margin-bottom:0;
-        height:48px;
+        height:64px;
         width:100%;
     }
 
     .top-menu img {
         border-style:none;
         cursor:pointer;
-        width:32px;
-        height:32px;
+        width:48px;
+        height:48px;
         padding-left:0;
         padding-top:6px;
     }
@@ -200,6 +205,10 @@
 
     .responsive {
         display:none;
+    }
+
+    .subst {
+        font-family:Courier;
     }
 
     .text {

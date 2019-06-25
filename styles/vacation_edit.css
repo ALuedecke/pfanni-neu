@@ -46,12 +46,12 @@ fieldset {
 }
 
 label {
-    font-size:small;
+    font-size:0.75em;
     font-weight:bold;
 }
 
 label.display {
-    font-size:small;
+    font-size:0.8em;
     font-weight:normal;
 }
 
@@ -79,6 +79,14 @@ option {
 .editaddress {
     width:100%;
     text-align:right;
+}
+
+.headline {
+    background-color:#B0E0FF;
+    border-style:none;
+    font-size:0.7em;
+    font-weight:bold;
+    width:290px;
 }
 
 .invisible {
@@ -124,6 +132,10 @@ option {
     background-color:#FFF0D0;
     color: #802000;
     text-align:center;
+}
+
+.subst {
+    font-family:Courier;
 }
 
 .txt {

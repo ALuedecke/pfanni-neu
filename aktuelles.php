@@ -85,8 +85,18 @@
                     <div id="content">
                         <blockquote style="text-align:left">
                             <p>&nbsp;</p>
+                            <p style="font-weight:bold">
+                            Wichtiger Hinweis:</p>
+                            <p>Die korrekten &Ouml;ffnungszeiten finden Sie nur auf:<br /><br />
+                               https://www.dr-pfannschmidt.de/<br />
+                               https://www.google.de/search? ...<br />
+                               https://www.oeffnungszeitenbuch.de/ ...<br /><br />
+                               Ver&ouml;ffentlichte &Ouml;ffnungszeiten auf anderen Seiten
+                               sind meist <span style="color:#C00000; font-weight:bold;">falsch</span><br />
+                               und unterliegen <span style="color:#C00000; font-weight:bold;">nicht</span> unserem Zugriff.
+                            </p>
                             <p style="color:#800000; font-weight:bold;">
-                                Bitte beachten Sie, dass eine halbe Stunde vor Sprechstundenende die Patientenannahme schließt!</p>
+                                <br />Bitte beachten Sie, dass eine halbe Stunde vor Sprechstundenende die Patientenannahme schließt!</p>
                             <p>&nbsp;</p>
                             <?php include("vacation_edit/vacation_get.php"); ?>
                         </blockquote>

@@ -7,7 +7,7 @@
     <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin, Urlaubszeiten, &Auml;nderung der Urlaubszeiten, Logon"  />
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
-    <title>Logon</title>
+    <title>Vacation Edit - Version 1.3.0</title>
     <link rel="Shortcut Icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_edit.css" type="text/css" />
 </head>
@@ -57,6 +57,9 @@
 	  </tr>
 	</table>
   </form>
+  <div class="stamp">
+      &copy; A. Luedecke 08/2018
+  </div>
   <?php
     if (isset($_SESSION["login"])) {
 	    if ($_SESSION["login"] != 1) {
