@@ -33,6 +33,8 @@
         $_SESSION["login"] = 1;
         # Setting session duration to 30 minutes
         $_SESSION["duration"] = time() + 1800;
+        # Keep logged user
+        setcookie("ThisUser", $logon->name, time() + 1800);
         break;
       } else {
           $_SESSION["login"] = 0;

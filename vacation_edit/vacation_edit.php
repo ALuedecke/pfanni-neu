@@ -5,6 +5,11 @@
  * Created:  Jul/21/2018
  */
   
+  if (!isset($_COOKIE["ThisUser"])) {
+    include("vacation_logon.php");
+    exit;
+  }
+
   header("Content-type:text/html; charset=utf-8");
   include("vacation_data.php");
   $address_file = 'vacation_edit/vacation_subst_address.json';
@@ -182,7 +187,15 @@
     <meta name="keywords" content="Kinderarzt Altglienicke, Arzt Altglienicke, Kinderarztpraxis Altglienicke, Kinderarzt Berlin, Urlaubszeiten, &Auml;nderung der Urlaubszeiten"  />
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width,initial-scale=0.5,minimum-scale=0.4,maximum-scale=1.0" />
-    <title>Vacation Edit - Version 1.3.0</title>
+    <meta http-equiv="refresh" content="5"/>
+    <title>
+        Vacation Edit - Version 1.3.0 - Logged on User:
+        <?php
+          if (isset($_COOKIE["ThisUser"])) {
+            echo " ".$_COOKIE["ThisUser"];
+          }
+        ?>
+    </title>
     <link rel="Shortcut Icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" media="screen" href="../styles/vacation_edit.css" type="text/css" />
 </head>
