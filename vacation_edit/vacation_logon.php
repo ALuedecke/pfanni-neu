@@ -1,3 +1,15 @@
+<?php 
+/*
+ * Author:   A. Luedecke
+ * Purpose:  Form for log on to edit vacation entries
+ * Created:  Jun/26/2019
+ */
+  
+   # Reset cookie for new User
+   if (isset($_COOKIE["ThisUser"])) {
+     setcookie("ThisUser", "", time() - 3600);
+   }
+?>
 <!DOCTYPE html>
 <html lang="de">
 
